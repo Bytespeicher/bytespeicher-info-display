@@ -18,10 +18,14 @@ function createWindow()
 {
     // Create the browser window.
     win = new BrowserWindow({
-        width: 800,
-        height: 600,
+        titleBarStyle: 'hidden',
+        width: 1080,
+        height: 768,
+        minWidth: 1080,
+        minHeight: 768,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            webSecurity: false
         }
     });
 
