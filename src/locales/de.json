@@ -1,3 +1,8 @@
 {
-    "message": "hello i18n !!"
+    "dashboard": {
+        "no_widgets_found": "Es wurden keine Widgets gefunden. Hier kannst du welche anlegen: {widget_link}"
+    },
+    "widgets": {
+        "title": "Widgets"
+    }
 }
