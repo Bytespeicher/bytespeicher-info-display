@@ -1,5 +1,15 @@
 <template>
     <v-container fluid>
+        <v-btn
+            small absolute
+            right
+            dark fab
+            color="blue-grey darken-4"
+            class="widgets-link"
+            to="/widgets"
+        >
+            <v-icon small dense>mdi-pencil</v-icon>
+        </v-btn>
         <template v-if="!widgets.length">
             <i18n
                 path="dashboard.no_widgets_found" tag="div"
@@ -25,6 +35,7 @@
                 </v-col>
             </v-row>
         </template>
+
     </v-container>
 </template>
 
@@ -52,5 +63,9 @@ export default {
         transform: translate(0, -50%);
         text-align: center;
         padding: 0 10%;
+    }
+
+    .widgets-link {
+        top: 16px;
     }
 </style>
