@@ -1,31 +1,48 @@
 {
-  "name": "bytespeicher-info-display",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
-  },
-  "dependencies": {
-    "core-js": "^3.6.4",
-    "vue": "^2.6.11",
-    "vue-router": "^3.1.5",
-    "vuex": "^3.1.2"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.2.0",
-    "@vue/cli-plugin-eslint": "~4.2.0",
-    "@vue/cli-plugin-router": "~4.2.0",
-    "@vue/cli-plugin-vuex": "~4.2.0",
-    "@vue/cli-service": "~4.2.0",
-    "@vue/eslint-config-airbnb": "^5.0.2",
-    "babel-eslint": "^10.0.3",
-    "eslint": "^6.7.2",
-    "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-vue": "^6.1.2",
-    "node-sass": "^4.12.0",
-    "sass-loader": "^8.0.2",
-    "vue-template-compiler": "^2.6.11"
-  }
+    "name": "bytespeicher-info-display",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "electron:serve": "vue-cli-service electron:serve",
+        "electron:build": "vue-cli-service electron:build",
+        "postinstall": "electron-builder install-app-deps",
+        "postuninstall": "electron-builder install-app-deps",
+        "lint": "vue-cli-service lint",
+        "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
+    },
+    "main": "background.js",
+    "dependencies": {
+        "@mdi/font": "^3.6.95",
+        "@vuex-orm/core": "^0.35.2",
+        "core-js": "^3.6.4",
+        "roboto-fontface": "*",
+        "vue": "^2.6.11",
+        "vue-i18n": "^8.0.0",
+        "vue-router": "^3.1.5",
+        "vuetify": "^2.2.11",
+        "vuex": "^3.1.2"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "~4.2.0",
+        "@vue/cli-plugin-eslint": "~4.2.0",
+        "@vue/cli-plugin-router": "~4.2.0",
+        "@vue/cli-plugin-vuex": "~4.2.0",
+        "@vue/cli-service": "~4.2.0",
+        "@vue/eslint-config-airbnb": "^5.0.2",
+        "babel-eslint": "^10.0.3",
+        "electron": "^7.1.13",
+        "eslint": "^6.7.2",
+        "eslint-plugin-import": "^2.20.1",
+        "eslint-plugin-vue": "^6.1.2",
+        "node-sass": "^4.12.0",
+        "sass": "^1.19.0",
+        "sass-loader": "^8.0.2",
+        "vue-cli-plugin-electron-builder": "~1.4.5",
+        "vue-cli-plugin-i18n": "^0.6.1",
+        "vue-cli-plugin-vuetify": "~2.0.5",
+        "vue-template-compiler": "^2.6.11",
+        "vuetify-loader": "^1.3.0"
+    }
 }
