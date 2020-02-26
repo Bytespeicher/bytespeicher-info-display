@@ -1,8 +1,12 @@
 {
+    "general": {
+        "no_widgets_found": "Es wurden keine Widgets gefunden."
+    },
     "dashboard": {
-        "no_widgets_found": "Es wurden keine Widgets gefunden. Hier kannst du welche anlegen: {widget_link}"
+        "create_widgets": "Hier kannst du Widgets anlegen: {widget_link}"
     },
     "widgets": {
-        "title": "Widgets"
+        "title": "Widgets",
+        "create_widget": "Widget anlegen"
     }
 }

@@ -11,14 +11,14 @@
             <v-icon small dense>mdi-pencil</v-icon>
         </v-btn>
         <template v-if="!widgets.length">
-            <i18n
-                path="dashboard.no_widgets_found" tag="div"
-                class="dashboard-empty-message title blue-grey--text text--darken-4"
-            >
-                <router-link place="widget_link" to="/widgets">
-                    {{ $t('widgets.title') }}
-                </router-link>
-            </i18n>
+            <div class="no-entries-message title blue-grey--text text--darken-4">
+                {{ $t('general.no_widgets_found')}}<br/>
+                <i18n path="dashboard.create_widgets" tag="p">
+                    <router-link place="widget_link" to="/widgets">
+                        {{ $t('widgets.title') }}
+                    </router-link>
+                </i18n>
+            </div>
         </template>
         <template v-else>
             <v-row>
@@ -54,18 +54,7 @@ export default {
 </script>
 
 <style lang="scss">
-    .dashboard-empty-message {
-        position: absolute;
-        width: 100%;
-        box-sizing: border-box;
-        top: 50%;
-        left: 0;
-        transform: translate(0, -50%);
-        text-align: center;
-        padding: 0 10%;
-    }
-
-    .widgets-link {
-        top: 16px;
-    }
+.widgets-link {
+    top: 16px;
+}
 </style>
