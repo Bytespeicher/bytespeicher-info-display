@@ -65,6 +65,8 @@
 </template>
 
 <script>
+import Widget from '../../store/models/Widget';
+
 export default {
     name: 'VWidgetsCreateEditDialog',
     props: {
@@ -113,7 +115,24 @@ export default {
         },
         save()
         {
+            const {models: data} = this;
+            if (!this.id)
+            {
+                Widget.insert({data})
+                    .then(this.clearForm)
+                    .then(() =>
+                    {
+                        this.show = false;
+                    });
+                return;
+            }
 
+            Widget.update({where: this.id, data})
+                .then(this.clearForm)
+                .then(() =>
+                {
+                    this.show = false;
+                });
         }
     }
 };
