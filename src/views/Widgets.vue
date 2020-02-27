@@ -21,6 +21,7 @@
                         bottom right
                         dark color="blue darken-1"
                         fab
+                        @click="openCreateEditDialog = true"
                     >
                         <v-icon>mdi-plus</v-icon>
                     </v-btn>
@@ -37,7 +38,7 @@
                             <v-tooltip bottom>
                                 <template v-slot:activator="{ on }">
                                     <v-card
-                                        v-on="on"
+                                        v-on="on" @click="openCreateEditDialog = true"
                                         hover class="add-card d-flex justify-center align-center"
                                     >
                                         <v-icon large>mdi-plus</v-icon>
@@ -50,19 +51,34 @@
                 </div>
             </template>
         </v-container>
+
+        <v-widgets-create-edit-dialog
+            v-model="openCreateEditDialog"
+        />
     </div>
 </template>
 
 <script>
 import Widget from '../store/models/Widget';
 
+import VWidgetsCreateEditDialog from '../components/ViewWidgets/VWidgetsCreateEditDialog.vue';
+
 export default {
     name: 'Widgets',
+    components: {
+        VWidgetsCreateEditDialog
+    },
     computed: {
         widgets()
         {
             return Widget.all();
         }
+    },
+    data()
+    {
+        return {
+            openCreateEditDialog: false
+        };
     }
 };
 </script>

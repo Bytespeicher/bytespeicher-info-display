@@ -4,7 +4,7 @@
             small absolute
             right
             dark fab
-            color="blue-grey darken-4"
+            color="blue-grey lighten-2"
             class="widgets-link"
             to="/widgets"
         >
