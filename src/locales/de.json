@@ -3,7 +3,10 @@
         "no_widgets_found": "Es wurden keine Widgets gefunden.",
         "form": {
             "save": "Speichern",
-            "abort": "Abbrechen"
+            "abort": "Abbrechen",
+            "errors": {
+                "field_is_required": "Dieses Feld ist erforderlich"
+            }
         }
     },
     "dashboard": {

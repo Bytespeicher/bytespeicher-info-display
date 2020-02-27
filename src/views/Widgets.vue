@@ -54,6 +54,7 @@
 
         <v-widgets-create-edit-dialog
             v-model="openCreateEditDialog"
+            :id="selectedWidgetId"
         />
     </div>
 </template>
@@ -77,8 +78,16 @@ export default {
     data()
     {
         return {
-            openCreateEditDialog: false
+            openCreateEditDialog: false,
+            selectedWidgetId: null
         };
+    },
+    watch: {
+        openCreateEditDialog(value)
+        {
+            if (value) { return; }
+            this.selectedWidgetId = null;
+        }
     }
 };
 </script>
