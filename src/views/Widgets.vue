@@ -19,7 +19,7 @@
                         v-on="on"
                         absolute small
                         bottom right
-                        dark color="blue darken-1"
+                        dark color="primary"
                         fab
                         @click="openCreateEditDialog = true"
                     >
@@ -29,7 +29,7 @@
                 <span>{{ $t('widgets.create_widget') }}</span>
             </v-tooltip>
         </v-app-bar>
-        <v-container fluid>
+        <v-container>
             <template v-if="!widgets.length">
                 <div class="no-entries-message title blue-grey--text text--darken-4">
                     {{ $t('general.no_widgets_found')}}
@@ -50,6 +50,23 @@
                     </v-row>
                 </div>
             </template>
+            <v-row v-else justify="center">
+                <v-col
+                    cols="4"
+                    lg="6"
+                    md="8"
+                    sm="12"
+                >
+                    <v-widget-listing
+                        v-for="(widget) in widgets"
+                        :key="widget.id"
+                        :title="widget.title"
+                        :type="widget.type"
+                        @requestEdition="openEditDialog(widget.id)"
+                        @requestDeletion="openDeleteDialog(widget.id)"
+                    />
+                </v-col>
+            </v-row>
         </v-container>
 
         <v-widgets-create-edit-dialog
@@ -63,11 +80,13 @@
 import Widget from '../store/models/Widget';
 
 import VWidgetsCreateEditDialog from '../components/ViewWidgets/VWidgetsCreateEditDialog.vue';
+import VWidgetListing from '../components/ViewWidgets/VWidgetListing.vue';
 
 export default {
     name: 'Widgets',
     components: {
-        VWidgetsCreateEditDialog
+        VWidgetsCreateEditDialog,
+        VWidgetListing
     },
     computed: {
         widgets()
@@ -87,6 +106,17 @@ export default {
         {
             if (value) { return; }
             this.selectedWidgetId = null;
+        }
+    },
+    methods: {
+        openDeleteDialog(widgetId)
+        {
+            console.log(widgetId);
+        },
+        openEditDialog(widgetId)
+        {
+            this.selectedWidgetId = widgetId;
+            this.openCreateEditDialog = true;
         }
     }
 };

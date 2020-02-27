@@ -11,6 +11,7 @@ export default class Widget extends Model
             cols: this.attr(null),
             offset: this.attr(null),
             type: this.attr(null),
+            title: this.attr(null),
             config: this.attr(null)
         };
     }

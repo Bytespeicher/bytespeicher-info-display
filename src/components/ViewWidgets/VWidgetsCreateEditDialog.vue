@@ -28,6 +28,7 @@
                                     :items="widgetTypes"
                                     :label="$t('widgets.form.type')"
                                     :rules="rules.required"
+                                    :disabled="!!id"
                                     required
                                     v-model="models.type"
                                 ></v-select>
@@ -38,7 +39,7 @@
                                     :label="$t('widgets.form.width')"
                                     :rules="rules.required"
                                     required
-                                    v-model="models.width"
+                                    v-model="models.cols"
                                 ></v-select>
                             </v-col>
                             <v-col cols="6">
@@ -111,13 +112,31 @@ export default {
             models: {
                 title: '',
                 type: 'Text',
-                width: '6',
+                cols: '6',
                 offset: '0'
             },
             rules: {
                 required: [v => !!v || this.$t('general.form.errors.field_is_required')]
             }
         };
+    },
+    watch: {
+        id(value)
+        {
+            if (!value)
+            {
+                this.$refs.form.reset();
+                return;
+            }
+
+            const widget = Widget.find(value);
+            this.models.title = widget.title;
+            this.models.type = widget.type;
+            this.models.cols = widget.cols;
+            this.models.offset = widget.offset;
+
+            this.$refs.form.validate(true);
+        }
     },
     methods:
     {
