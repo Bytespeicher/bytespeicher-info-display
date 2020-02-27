@@ -11,10 +11,10 @@
             "deletionWarning": "Diese Aktion kann nicht rückgängig gemacht werden."
         }
     },
-    "dashboard": {
+    "view_dashboard": {
         "create_widgets": "Hier kannst du Widgets anlegen: {widget_link}"
     },
-    "widgets": {
+    "view_widgets": {
         "title": "Widgets",
         "form": {
             "header": {
@@ -29,6 +29,13 @@
         "create_widget": "Widget anlegen",
         "delete_dialog": {
             "header": "Widget löschen"
+        }
+    },
+    "widgets": {
+        "general": {
+            "error": {
+                "no_configuration": "Hier fehlt noch eine Konfiguration"
+            }
         }
     }
 }

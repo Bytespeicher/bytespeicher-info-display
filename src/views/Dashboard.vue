@@ -13,10 +13,10 @@
         <template v-if="!widgets.length">
             <div class="no-entries-message title blue-grey--text text--darken-4">
                 {{ $t('general.no_widgets_found')}}<br/>
-                <i18n path="dashboard.create_widgets" tag="p">
+                <i18n path="view_dashboard.create_widgets" tag="p">
                     <template v-slot:widget_link>
                         <router-link to="/widgets">
-                            {{ $t('widgets.title') }}
+                            {{ $t('view_widgets.title') }}
                         </router-link>
                     </template>
                 </i18n>
@@ -32,7 +32,8 @@
                 >
                     <component
                         :is="`VWidget${widget.type}`"
-                        v-bind="widget.config"
+                        :config="widget.config"
+                        :title="widget.title"
                     />
                 </v-col>
             </v-row>

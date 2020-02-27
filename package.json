@@ -14,7 +14,7 @@
     },
     "main": "background.js",
     "dependencies": {
-        "@mdi/font": "^3.6.95",
+        "@mdi/font": "^4.9.95",
         "@vuex-orm/core": "^0.35.2",
         "core-js": "^3.6.4",
         "roboto-fontface": "*",

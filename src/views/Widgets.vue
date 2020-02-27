@@ -11,7 +11,7 @@
                 <v-icon>mdi-arrow-left</v-icon>
             </v-btn>
 
-            <v-toolbar-title class="pl-2">{{ $t('widgets.title') }}</v-toolbar-title>
+            <v-toolbar-title class="pl-2">{{ $t('view_widgets.title') }}</v-toolbar-title>
 
             <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
@@ -26,7 +26,7 @@
                         <v-icon>mdi-plus</v-icon>
                     </v-btn>
                 </template>
-                <span>{{ $t('widgets.create_widget') }}</span>
+                <span>{{ $t('view_widgets.create_widget') }}</span>
             </v-tooltip>
         </v-app-bar>
         <v-container>
@@ -44,7 +44,7 @@
                                         <v-icon large>mdi-plus</v-icon>
                                     </v-card>
                                 </template>
-                                <span>{{ $t('widgets.create_widget') }}</span>
+                                <span>{{ $t('view_widgets.create_widget') }}</span>
                             </v-tooltip>
                         </v-col>
                     </v-row>
@@ -78,7 +78,7 @@
             v-model="showDeleteModal" @deletionConfirmed="deleteConfirmation"
         >
             <template v-slot:header>
-                {{ $t(`widgets.delete_dialog.header`) }}
+                {{ $t(`view_widgets.delete_dialog.header`) }}
             </template>
         </v-delete-dialog>
     </div>
