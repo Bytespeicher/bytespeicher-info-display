@@ -14,9 +14,11 @@
             <div class="no-entries-message title blue-grey--text text--darken-4">
                 {{ $t('general.no_widgets_found')}}<br/>
                 <i18n path="dashboard.create_widgets" tag="p">
-                    <router-link place="widget_link" to="/widgets">
-                        {{ $t('widgets.title') }}
-                    </router-link>
+                    <template v-slot:widget_link>
+                        <router-link to="/widgets">
+                            {{ $t('widgets.title') }}
+                        </router-link>
+                    </template>
                 </i18n>
             </div>
         </template>
