@@ -2,7 +2,9 @@
     <v-app>
         <v-content>
             <transition name="fade" mode="out-in">
-                <router-view />
+                <keep-alive include="Dashboard">
+                    <router-view />
+                </keep-alive>
             </transition>
         </v-content>
     </v-app>
