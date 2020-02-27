@@ -107,12 +107,12 @@ export default {
         return {
             valid: true,
             widgetTypes,
-            widgetsWidths: ['4', '5', '6', '7', '8', '9', '10', '11', '12'],
+            widgetsWidths: ['3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
             widgetsOffset: ['0', '1', '2', '3', '4', '5', '6', '7', '8'],
             models: {
                 title: '',
                 type: 'Text',
-                cols: '6',
+                cols: '4',
                 offset: '0'
             },
             rules: {
@@ -135,7 +135,10 @@ export default {
             this.models.cols = widget.cols;
             this.models.offset = widget.offset;
 
-            this.$refs.form.validate(true);
+            this.$nextTick(() =>
+            {
+                this.$refs.form.validate(true);
+            });
         }
     },
     methods:
@@ -148,7 +151,7 @@ export default {
             {
                 this.models.title = '';
                 this.models.type = 'Text';
-                this.models.cols = '6';
+                this.models.cols = '4';
                 this.models.offset = '0';
             });
         },
