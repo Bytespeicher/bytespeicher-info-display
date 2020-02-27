@@ -23,7 +23,16 @@
                                     v-model="models.title"
                                 />
                             </v-col>
-                            <v-col cols="12" sm="6">
+                            <v-col cols="12">
+                                <v-select
+                                    :items="widgetTypes"
+                                    :label="$t('widgets.form.type')"
+                                    :rules="rules.required"
+                                    required
+                                    v-model="models.type"
+                                ></v-select>
+                            </v-col>
+                            <v-col cols="6">
                                 <v-select
                                     :items="widgetsWidths"
                                     :label="$t('widgets.form.width')"
@@ -32,7 +41,7 @@
                                     v-model="models.width"
                                 ></v-select>
                             </v-col>
-                            <v-col cols="12" sm="6">
+                            <v-col cols="6">
                                 <v-select
                                     :items="widgetsOffset"
                                     :label="$t('widgets.form.offset')"
@@ -67,6 +76,8 @@
 <script>
 import Widget from '../../store/models/Widget';
 
+import widgetTypes from '../../static/widgets';
+
 export default {
     name: 'VWidgetsCreateEditDialog',
     props: {
@@ -94,10 +105,12 @@ export default {
     {
         return {
             valid: true,
+            widgetTypes,
             widgetsWidths: ['4', '5', '6', '7', '8', '9', '10', '11', '12'],
             widgetsOffset: ['0', '1', '2', '3', '4', '5', '6', '7', '8'],
             models: {
                 title: '',
+                type: 'Text',
                 width: '6',
                 offset: '0'
             },
