@@ -31,7 +31,7 @@
                                     :disabled="!!id"
                                     required
                                     v-model="models.type"
-                                ></v-select>
+                                />
                             </v-col>
                             <v-col cols="6">
                                 <v-select
@@ -40,7 +40,7 @@
                                     :rules="rules.required"
                                     required
                                     v-model="models.cols"
-                                ></v-select>
+                                />
                             </v-col>
                             <v-col cols="6">
                                 <v-select
@@ -49,13 +49,13 @@
                                     :rules="rules.required"
                                     required
                                     v-model="models.offset"
-                                ></v-select>
+                                />
                             </v-col>
                         </v-row>
                     </v-container>
                 </v-card-text>
                 <v-card-actions>
-                    <v-spacer></v-spacer>
+                    <v-spacer />
                     <v-btn
                         color="grey darken-1" outlined
                         @click="abort"
@@ -125,7 +125,7 @@ export default {
         {
             if (!value)
             {
-                this.$refs.form.reset();
+                this.reset();
                 return;
             }
 
@@ -140,9 +140,21 @@ export default {
     },
     methods:
     {
-        abort()
+        reset()
         {
             this.$refs.form.reset();
+
+            this.$nextTick(() =>
+            {
+                this.models.title = '';
+                this.models.type = 'Text';
+                this.models.cols = '6';
+                this.models.offset = '0';
+            });
+        },
+        abort()
+        {
+            this.reset();
             this.show = false;
         },
         save()
