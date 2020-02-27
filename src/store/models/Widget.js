@@ -7,7 +7,7 @@ export default class Widget extends Model
     static fields()
     {
         return {
-            id: this.increment(),
+            id: this.uid(),
             cols: this.attr(null),
             offset: this.attr(null),
             type: this.attr(null),
