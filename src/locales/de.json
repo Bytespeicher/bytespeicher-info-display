@@ -3,10 +3,12 @@
         "no_widgets_found": "Es wurden keine Widgets gefunden.",
         "form": {
             "save": "Speichern",
+            "delete": "Löschen",
             "abort": "Abbrechen",
             "errors": {
                 "field_is_required": "Dieses Feld ist erforderlich"
-            }
+            },
+            "deletionWarning": "Diese Aktion kann nicht rückgängig gemacht werden."
         }
     },
     "dashboard": {
@@ -24,6 +26,9 @@
             "width": "Breite",
             "offset": "Offset"
         },
-        "create_widget": "Widget anlegen"
+        "create_widget": "Widget anlegen",
+        "delete_dialog": {
+            "header": "Widget löschen"
+        }
     }
 }

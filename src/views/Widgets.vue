@@ -73,6 +73,14 @@
             v-model="openCreateEditDialog"
             :id="selectedWidgetId"
         />
+
+        <v-delete-dialog
+            v-model="showDeleteModal" @deletionConfirmed="deleteConfirmation"
+        >
+            <template v-slot:header>
+                {{ $t(`widgets.delete_dialog.header`) }}
+            </template>
+        </v-delete-dialog>
     </div>
 </template>
 
@@ -81,11 +89,13 @@ import Widget from '../store/models/Widget';
 
 import VWidgetsCreateEditDialog from '../components/ViewWidgets/VWidgetsCreateEditDialog.vue';
 import VWidgetListing from '../components/ViewWidgets/VWidgetListing.vue';
+import VDeleteDialog from '../components/VDeleteDialog.vue';
 
 export default {
     name: 'Widgets',
     components: {
         VWidgetsCreateEditDialog,
+        VDeleteDialog,
         VWidgetListing
     },
     computed: {
@@ -98,6 +108,7 @@ export default {
     {
         return {
             openCreateEditDialog: false,
+            showDeleteModal: false,
             selectedWidgetId: null
         };
     },
@@ -109,14 +120,24 @@ export default {
         }
     },
     methods: {
-        openDeleteDialog(widgetId)
-        {
-            console.log(widgetId);
-        },
         openEditDialog(widgetId)
         {
             this.selectedWidgetId = widgetId;
             this.openCreateEditDialog = true;
+        },
+        openDeleteDialog(widgetId)
+        {
+            this.showDeleteModal = true;
+            this.selectedWidgetId = widgetId;
+        },
+        deleteConfirmation()
+        {
+            const id = this.selectedWidgetId;
+            this.selectedWidgetId = null;
+            Widget.delete(id).then(() =>
+            {
+                this.showDeleteModal = false;
+            });
         }
     }
 };
