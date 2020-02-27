@@ -31,7 +31,7 @@
                     :offset="widget.offset"
                 >
                     <component
-                        :is="widget.type"
+                        :is="`VWidget${widget.type}`"
                         v-bind="widget.config"
                     />
                 </v-col>
@@ -46,6 +46,9 @@ import Widget from '../store/models/Widget';
 
 export default {
     name: 'Dashboard',
+    components: {
+        VWidgetText: () => import(/* webpackChunkName: "VWidgetText" */ '../components/DashboardWidgets/VWidgetText/index.vue') // eslint-disable-line
+    },
     computed: {
         widgets()
         {

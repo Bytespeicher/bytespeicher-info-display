@@ -2,7 +2,8 @@
     <v-card>
         <v-row class="widget-listing px-4" align="center">
             <v-col>
-                {{ title }} - {{ type }}
+                {{ title }}<br/>
+                <span class="caption font-weight-light"> {{ type }}</span>
             </v-col>
             <v-col
                 class="group-actions flex-grow-0 d-flex"

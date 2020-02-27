@@ -52,10 +52,10 @@
             </template>
             <v-row v-else justify="center">
                 <v-col
-                    cols="4"
-                    lg="6"
-                    md="8"
-                    sm="12"
+                    cols="12"
+                    xl="5"
+                    lg="8"
+                    md="10"
                 >
                     <v-widget-listing
                         v-for="(widget) in widgets"
