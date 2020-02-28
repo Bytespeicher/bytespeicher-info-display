@@ -24,22 +24,23 @@
             {{ $t('widgets.general.error.no_configuration') }}
         </v-card-text>
 
-        <v-config-dialog
-            v-model="showConfigDialog"
-            :id="id"
-        />
+        <v-widgets-create-edit-dialog
+            v-model="showConfigDialog" :id="id"
+        >
+            <v-config-dialog-fields v-bind="config"/>
+        </v-widgets-create-edit-dialog>
     </v-card>
 </template>
 
 <script>
-import BaseWidget from '../BaseWidget.vue';
-import VConfigDialog from './VConfigDialog.vue';
+import BaseWidget from '../BaseWidget/index.vue';
+import VConfigDialogFields from './VConfigDialogFields.vue';
 
 export default {
     name: 'VWidgetText',
     extends: BaseWidget,
     components: {
-        VConfigDialog
+        VConfigDialogFields
     }
 };
 </script>

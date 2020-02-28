@@ -1,8 +1,12 @@
 <script>
-import Widget from '../../store/models/Widget';
+import Widget from '../../../store/models/Widget';
+import VWidgetsCreateEditDialog from '../VWidgetsCreateEditDialog.vue';
 
 export default {
     name: 'BaseWidget',
+    components: {
+        VWidgetsCreateEditDialog
+    },
     props: {
         id: {
             type: String,

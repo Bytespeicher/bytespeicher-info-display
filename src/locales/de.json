@@ -5,7 +5,8 @@
             "delete": "Löschen",
             "abort": "Abbrechen",
             "errors": {
-                "field_is_required": "Dieses Feld ist erforderlich"
+                "field_is_required": "Dieses Feld ist erforderlich",
+                "field_max_length": "Maximal {size} Zeichen"
             },
             "deletionWarning": "Diese Aktion kann nicht rückgängig gemacht werden."
         }
@@ -32,6 +33,11 @@
                 "type": "Typ",
                 "width": "Breite",
                 "offset": "Offset"
+            }
+        },
+        "vtext": {
+            "form": {
+                "text": "Text"
             }
         }
     }

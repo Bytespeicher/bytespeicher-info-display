@@ -12,9 +12,9 @@
                 </span>
             </v-card-title>
             <v-form ref="form" v-model="valid">
-                <v-card-text>
+                <v-card-text class="py-0">
                     <v-container>
-                        <v-row>
+                        <v-row dense>
                             <v-col cols="12">
                                 <v-text-field
                                     :label="$t('widgets.general.form.title')"
@@ -23,12 +23,11 @@
                                     v-model="models.title"
                                 />
                             </v-col>
-                            <v-col cols="12">
+                            <v-col v-if="!id" cols="12">
                                 <v-select
                                     :items="widgetTypes"
                                     :label="$t('widgets.general.form.type')"
                                     :rules="rules.required"
-                                    :disabled="!!id"
                                     required
                                     v-model="models.type"
                                 />
@@ -51,6 +50,8 @@
                                     v-model="models.offset"
                                 />
                             </v-col>
+
+                            <slot />
                         </v-row>
                     </v-container>
                 </v-card-text>
@@ -58,7 +59,7 @@
                     <v-spacer />
                     <v-btn
                         color="grey darken-1" outlined
-                        @click="abort"
+                        @click="show = false"
                     >
                         {{ $t('general.form.abort') }}
                     </v-btn>
@@ -121,31 +122,41 @@ export default {
         };
     },
     watch: {
-        id(value)
-        {
-            if (!value)
+        show: {
+            handler(value)
             {
-                this.reset();
-                return;
+                if (!value) { return; }
+                if (!this.id)
+                {
+                    this.reset();
+                    return;
+                }
+
+                const widget = Widget.find(this.id);
+                this.models.title = widget.title;
+                this.models.type = widget.type;
+                this.models.cols = widget.cols;
+                this.models.offset = widget.offset;
+
+                this.$nextTick(() =>
+                {
+                    this.$refs.form.validate(true);
+
+                    if (this.$slots.default)
+                    {
+                        this.$slots.default[0].componentInstance.reset();
+                    }
+                });
             }
-
-            const widget = Widget.find(value);
-            this.models.title = widget.title;
-            this.models.type = widget.type;
-            this.models.cols = widget.cols;
-            this.models.offset = widget.offset;
-
-            this.$nextTick(() =>
-            {
-                this.$refs.form.validate(true);
-            });
         }
     },
     methods:
     {
         reset()
         {
-            this.$refs.form.reset();
+            const {form} = this.$refs;
+            if (!form) { return; }
+            form.reset();
 
             this.$nextTick(() =>
             {
@@ -154,11 +165,6 @@ export default {
                 this.models.cols = '4';
                 this.models.offset = '0';
             });
-        },
-        abort()
-        {
-            this.reset();
-            this.show = false;
         },
         save()
         {
@@ -176,11 +182,14 @@ export default {
                 return;
             }
 
+            if (this.$slots.default)
+            {
+                this.$slots.default[0].componentInstance.save();
+            }
+
             Widget.update({where: this.id, data})
-                .then(this.clearForm)
                 .then(() =>
                 {
-                    this.reset();
                     this.show = false;
                 });
         }
