@@ -33,26 +33,60 @@
                     <component
                         :is="`VWidget${widget.type}`"
                         :id="widget.id"
+                        @requestDeletion="openDeleteDialog(widget.id)"
                     />
                 </v-col>
             </v-row>
         </template>
+
+        <v-delete-dialog
+            v-model="showDeleteModal" @deletionConfirmed="deleteConfirmation"
+        >
+            <template v-slot:header>
+                {{ $t(`view_widgets.delete_dialog.header`) }}
+            </template>
+        </v-delete-dialog>
 
     </v-container>
 </template>
 
 <script>
 import Widget from '../store/models/Widget';
+import VDeleteDialog from '../components/VDeleteDialog.vue';
 
 export default {
     name: 'Dashboard',
     components: {
+        VDeleteDialog,
         VWidgetText: () => import(/* webpackChunkName: "VWidgetText" */ '../components/DashboardWidgets/VWidgetText/index.vue') // eslint-disable-line
     },
     computed: {
         widgets()
         {
             return Widget.all();
+        }
+    },
+    data()
+    {
+        return {
+            showDeleteModal: false,
+            selectedWidgetId: null
+        };
+    },
+    methods: {
+        openDeleteDialog(widgetId)
+        {
+            this.showDeleteModal = true;
+            this.selectedWidgetId = widgetId;
+        },
+        deleteConfirmation()
+        {
+            const id = this.selectedWidgetId;
+            this.selectedWidgetId = null;
+            Widget.delete(id).then(() =>
+            {
+                this.showDeleteModal = false;
+            });
         }
     }
 };
