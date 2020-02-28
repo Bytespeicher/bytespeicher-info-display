@@ -7,6 +7,7 @@
             <div class="widget-actions">
                 <v-btn
                     icon x-small
+                    @click="showConfigDialog = true"
                 >
                     <v-icon>mdi-cogs</v-icon>
                 </v-btn>
@@ -15,14 +16,23 @@
         <v-card-text v-if="!config" class="text-center">
             {{ $t('widgets.general.error.no_configuration') }}
         </v-card-text>
+
+        <v-config-dialog
+            v-model="showConfigDialog"
+            :id="id"
+        />
     </v-card>
 </template>
 
 <script>
 import BaseWidget from '../BaseWidget.vue';
+import VConfigDialog from './VConfigDialog.vue';
 
 export default {
     name: 'VWidgetText',
-    extends: BaseWidget
+    extends: BaseWidget,
+    components: {
+        VConfigDialog
+    }
 };
 </script>

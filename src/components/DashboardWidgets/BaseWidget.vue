@@ -1,15 +1,39 @@
 <script>
+import Widget from '../../store/models/Widget';
+
 export default {
     name: 'BaseWidget',
     props: {
-        title: {
+        id: {
             type: String,
             required: true
+        }
+    },
+    computed: {
+        widget: {
+            get()
+            {
+                return Widget.find(this.id);
+            }
+        },
+        title: {
+            get()
+            {
+                return this.widget.title;
+            }
         },
         config: {
-            type: Object,
-            default: null
+            get()
+            {
+                return this.widget.config;
+            }
         }
+    },
+    data()
+    {
+        return {
+            showConfigDialog: false
+        };
     }
 };
 </script>

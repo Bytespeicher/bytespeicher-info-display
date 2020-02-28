@@ -32,8 +32,7 @@
                 >
                     <component
                         :is="`VWidget${widget.type}`"
-                        :config="widget.config"
-                        :title="widget.title"
+                        :id="widget.id"
                     />
                 </v-col>
             </v-row>

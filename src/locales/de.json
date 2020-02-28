@@ -35,6 +35,9 @@
         "general": {
             "error": {
                 "no_configuration": "Hier fehlt noch eine Konfiguration"
+            },
+            "config": {
+                "header": "Konfiguration"
             }
         }
     }
