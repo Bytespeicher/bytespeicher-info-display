@@ -1,6 +1,6 @@
 <template>
     <v-card height="200px">
-        <div class="body-2 mb-2 px-2 pt-1 d-flex">
+        <div class="body-2 px-4 pt-1 d-flex">
             <div class="flex-grow-1">
                 {{ title }}
             </div>
@@ -23,11 +23,14 @@
         <v-card-text v-if="!config" class="text-center">
             {{ $t('widgets.general.error.no_configuration') }}
         </v-card-text>
+        <v-card-text v-else class="body-1 blue-grey--text text--darken-4">
+            {{ config.text }}
+        </v-card-text>
 
         <v-widgets-create-edit-dialog
             v-model="showConfigDialog" :id="id"
         >
-            <v-config-dialog-fields v-bind="config"/>
+            <v-config-dialog-fields v-bind="config" @save="config = $event"/>
         </v-widgets-create-edit-dialog>
     </v-card>
 </template>

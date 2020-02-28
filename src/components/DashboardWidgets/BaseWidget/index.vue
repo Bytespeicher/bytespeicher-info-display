@@ -30,6 +30,10 @@ export default {
             get()
             {
                 return this.widget.config;
+            },
+            set(config)
+            {
+                Widget.update({where: this.id, data: {config}});
             }
         }
     },

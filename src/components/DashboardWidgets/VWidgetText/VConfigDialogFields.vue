@@ -44,7 +44,7 @@ export default {
         },
         save()
         {
-            console.log('SAVE');
+            this.$emit('save', {text: this.models.text});
         }
     }
 };
