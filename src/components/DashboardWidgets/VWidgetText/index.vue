@@ -1,5 +1,5 @@
 <template>
-    <v-card min-height="200px">
+    <v-card height="300px">
         <div class="body-2 px-4 pt-1 d-flex">
             <div class="flex-grow-1">
                 {{ title }}

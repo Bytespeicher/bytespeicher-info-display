@@ -77,7 +77,8 @@ export default {
     components: {
         VDeleteDialog,
         VWidgetsCreateEditDialog,
-        VWidgetText: () => import(/* webpackChunkName: "VWidgetText" */ '../components/DashboardWidgets/VWidgetText/index.vue') // eslint-disable-line
+        VWidgetText: () => import(/* webpackChunkName: "VWidgetText" */ '../components/DashboardWidgets/VWidgetText/index.vue'), // eslint-disable-line
+        VWidgetRSS: () => import(/* webpackChunkName: "VWidgetText" */ '../components/DashboardWidgets/VWidgetRSS/index.vue') // eslint-disable-line
     },
     computed: {
         widgets()

@@ -39,6 +39,11 @@
             "form": {
                 "text": "Text"
             }
+        },
+        "vrss": {
+            "form": {
+                "rssUrl": "Link zum RSS-Feed"
+            }
         }
     }
 }

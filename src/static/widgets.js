@@ -1,3 +1,4 @@
 export default [
-    'Text'
+    'Text',
+    'RSS'
 ];
