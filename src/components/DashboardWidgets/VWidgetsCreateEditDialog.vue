@@ -8,7 +8,7 @@
         <v-card>
             <v-card-title>
                 <span class="headline">
-                    {{ $t(`view_widgets.form.header.${id === null ? 'create' : 'edit'}`) }}
+                    {{ $t(`widgets.general.form.header.${id === null ? 'create' : 'edit'}`) }}
                 </span>
             </v-card-title>
             <v-form ref="form" v-model="valid">
@@ -17,7 +17,7 @@
                         <v-row>
                             <v-col cols="12">
                                 <v-text-field
-                                    :label="$t('view_widgets.form.title')"
+                                    :label="$t('widgets.general.form.title')"
                                     :rules="rules.required"
                                     required
                                     v-model="models.title"
@@ -26,7 +26,7 @@
                             <v-col cols="12">
                                 <v-select
                                     :items="widgetTypes"
-                                    :label="$t('view_widgets.form.type')"
+                                    :label="$t('widgets.general.form.type')"
                                     :rules="rules.required"
                                     :disabled="!!id"
                                     required
@@ -36,7 +36,7 @@
                             <v-col cols="6">
                                 <v-select
                                     :items="widgetsWidths"
-                                    :label="$t('view_widgets.form.width')"
+                                    :label="$t('widgets.general.form.width')"
                                     :rules="rules.required"
                                     required
                                     v-model="models.cols"
@@ -45,7 +45,7 @@
                             <v-col cols="6">
                                 <v-select
                                     :items="widgetsOffset"
-                                    :label="$t('view_widgets.form.offset')"
+                                    :label="$t('widgets.general.form.offset')"
                                     :rules="rules.required"
                                     required
                                     v-model="models.offset"
@@ -162,13 +162,15 @@ export default {
         },
         save()
         {
-            const {models: data} = this;
+            const {models} = this;
+            const data = {...models};
             if (!this.id)
             {
                 Widget.insert({data})
                     .then(this.clearForm)
                     .then(() =>
                     {
+                        this.reset();
                         this.show = false;
                     });
                 return;
@@ -178,6 +180,7 @@ export default {
                 .then(this.clearForm)
                 .then(() =>
                 {
+                    this.reset();
                     this.show = false;
                 });
         }

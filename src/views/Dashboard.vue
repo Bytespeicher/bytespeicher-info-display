@@ -1,25 +1,38 @@
 <template>
     <v-container fluid>
-        <v-btn
-            small absolute
-            right
-            dark fab
-            color="blue-grey lighten-2"
-            class="widgets-link"
-            to="/widgets"
-        >
-            <v-icon small dense>mdi-pencil</v-icon>
-        </v-btn>
+        <v-tooltip top>
+            <template v-slot:activator="{ on }">
+                <v-btn
+                    v-on="on"
+                    x-small absolute
+                    dark fab
+                    color="blue-grey lighten-3"
+                    class="creation-fab"
+                    @click="showCreateDialog = true"
+                >
+                    <v-icon small dense>mdi-plus</v-icon>
+                </v-btn>
+            </template>
+            <span>{{ $t('view_dashboard.create_widget') }}</span>
+        </v-tooltip>
         <template v-if="!widgets.length">
             <div class="no-entries-message title blue-grey--text text--darken-4">
-                {{ $t('general.no_widgets_found')}}<br/>
-                <i18n path="view_dashboard.create_widgets" tag="p">
-                    <template v-slot:widget_link>
-                        <router-link to="/widgets">
-                            {{ $t('view_widgets.title') }}
-                        </router-link>
-                    </template>
-                </i18n>
+                {{ $t('view_dashboard.no_widgets_found')}}<br/>
+                <v-row justify="center" class="mt-6">
+                    <v-col cols="3">
+                        <v-tooltip bottom>
+                            <template v-slot:activator="{ on }">
+                                <v-card
+                                    v-on="on" @click="showCreateDialog = true"
+                                    hover class="add-card d-flex justify-center align-center"
+                                >
+                                    <v-icon large>mdi-plus</v-icon>
+                                </v-card>
+                            </template>
+                            <span>{{ $t('view_dashboard.create_widget') }}</span>
+                        </v-tooltip>
+                    </v-col>
+                </v-row>
             </div>
         </template>
         <template v-else>
@@ -39,11 +52,15 @@
             </v-row>
         </template>
 
+        <v-widgets-create-edit-dialog
+            v-model="showCreateDialog"
+        />
+
         <v-delete-dialog
             v-model="showDeleteModal" @deletionConfirmed="deleteConfirmation"
         >
             <template v-slot:header>
-                {{ $t(`view_widgets.delete_dialog.header`) }}
+                {{ $t(`widgets.general.headers.delete_dialog`) }}
             </template>
         </v-delete-dialog>
 
@@ -52,12 +69,14 @@
 
 <script>
 import Widget from '../store/models/Widget';
+import VWidgetsCreateEditDialog from '../components/DashboardWidgets/VWidgetsCreateEditDialog.vue';
 import VDeleteDialog from '../components/VDeleteDialog.vue';
 
 export default {
     name: 'Dashboard',
     components: {
         VDeleteDialog,
+        VWidgetsCreateEditDialog,
         VWidgetText: () => import(/* webpackChunkName: "VWidgetText" */ '../components/DashboardWidgets/VWidgetText/index.vue') // eslint-disable-line
     },
     computed: {
@@ -70,6 +89,7 @@ export default {
     {
         return {
             showDeleteModal: false,
+            showCreateDialog: false,
             selectedWidgetId: null
         };
     },
@@ -93,7 +113,15 @@ export default {
 </script>
 
 <style lang="scss">
-.widgets-link {
-    top: 16px;
+.creation-fab {
+    bottom: 6px;
+    right: 4px;
+}
+
+.add-card {
+    height: 164px;
+    > .v-icon {
+        font-size: 72px;
+    }
 }
 </style>

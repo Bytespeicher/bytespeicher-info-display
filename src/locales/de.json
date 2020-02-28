@@ -1,6 +1,5 @@
 {
     "general": {
-        "no_widgets_found": "Es wurden keine Widgets gefunden.",
         "form": {
             "save": "Speichern",
             "delete": "Löschen",
@@ -12,32 +11,27 @@
         }
     },
     "view_dashboard": {
-        "create_widgets": "Hier kannst du Widgets anlegen: {widget_link}"
-    },
-    "view_widgets": {
-        "title": "Widgets",
-        "form": {
-            "header": {
-                "create": "Widget anlegen",
-                "edit": "Widget bearbeiten"
-            },
-            "title": "Titel",
-            "type": "Typ",
-            "width": "Breite",
-            "offset": "Offset"
-        },
-        "create_widget": "Widget anlegen",
-        "delete_dialog": {
-            "header": "Widget löschen"
-        }
+        "no_widgets_found": "Es wurden keine Widgets gefunden.",
+        "create_widget": "Widget anlegen"
     },
     "widgets": {
         "general": {
             "error": {
                 "no_configuration": "Hier fehlt noch eine Konfiguration"
             },
-            "config": {
-                "header": "Konfiguration"
+            "headers": {
+                "config": "Konfiguration",
+                "delete_dialog": "Widget löschen"
+            },
+            "form": {
+                "header": {
+                    "create": "Widget anlegen",
+                    "edit": "Widget bearbeiten"
+                },
+                "title": "Titel",
+                "type": "Typ",
+                "width": "Breite",
+                "offset": "Offset"
             }
         }
     }

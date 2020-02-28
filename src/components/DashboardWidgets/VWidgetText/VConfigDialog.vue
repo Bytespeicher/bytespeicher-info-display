@@ -8,7 +8,7 @@
         <v-card>
             <v-card-title>
                 <span class="headline">
-                    {{ $t('widgets.general.config.header') }}
+                    {{ $t('widgets.general.headers.config') }}
                 </span>
             </v-card-title>
             <v-form ref="form" v-model="valid">
