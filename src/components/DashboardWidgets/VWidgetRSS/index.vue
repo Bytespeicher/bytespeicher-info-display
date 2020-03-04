@@ -27,16 +27,6 @@
             <template v-if="errorMsg">
                 <span class="res--text">{{ errorMsg }}</span>
             </template>
-            <template v-if="loading">
-                <v-row align="center" justify="center">
-                    <v-progress-circular
-                        v-if="loading"
-                        class="mt-12"
-                        indeterminate
-                        color="primary"
-                    />
-                </v-row>
-            </template>
             <template v-if="feedEntries">
                 <VRSSItem
                     v-for="(entry, index) in feedEntries"
@@ -48,6 +38,13 @@
                 />
             </template>
         </v-card-text>
+
+        <v-progress-linear
+            v-if="loading"
+            class="progress-linear-bottom"
+            indeterminate
+            color="primary"
+        />
 
         <v-widgets-create-edit-dialog
             v-model="showConfigDialog" :id="id"
@@ -62,6 +59,8 @@ import Parser from 'rss-parser';
 import BaseWidget from '../BaseWidget/index.vue';
 import VConfigDialogFields from './VConfigDialogFields.vue';
 import VRSSItem from './VRSSItem.vue';
+
+const {setInterval, clearInterval} = global;
 
 const parser = new Parser();
 const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
@@ -82,10 +81,8 @@ export default {
                     !value.rssUrl ||
                     (oldValue && oldValue.rssUrl === value.rssUrl)
                 ) { return; }
-                this.errorMsg = null;
-                this.feedEntries = null;
-                this.loading = true;
-                parser.parseURL(CORS_PROXY + value.rssUrl, this.rssCallback);
+
+                this.loadRss();
             },
             deep: true,
             immediate: true
@@ -96,10 +93,28 @@ export default {
         return {
             errorMsg: null,
             feedEntries: null,
-            loading: false
+            loading: false,
+            interval: null
         };
     },
+    mounted()
+    {
+        this.interval = setInterval(this.loadRss, 360000); // 60 min
+    },
+    beforeDestroy()
+    {
+        clearInterval(this.interval);
+    },
     methods: {
+        loadRss()
+        {
+            const {config} = this;
+
+            if (!config || !config.rssUrl) { return; }
+            this.errorMsg = null;
+            this.loading = true;
+            parser.parseURL(CORS_PROXY + config.rssUrl, this.rssCallback);
+        },
         rssCallback(err, rss)
         {
             this.loading = false;

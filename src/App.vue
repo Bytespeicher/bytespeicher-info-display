@@ -44,4 +44,9 @@ html { overflow: auto !important; }
 .fade-leave-active {
     opacity: 0
 }
+
+.progress-linear-bottom {
+    position: absolute !important;
+    bottom: 0;
+}
 </style>
