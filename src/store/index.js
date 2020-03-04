@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import VuexORM from '@vuex-orm/core';
+import VuexPersistence from 'vuex-persist';
 
 // models
 import Widget from './models/Widget';
@@ -12,9 +13,17 @@ const database = new VuexORM.Database();
 // Register Models to the database.
 database.register(Widget);
 
+// Persisting
+const {localStorage} = global;
+
+const vuexLocal = new VuexPersistence({
+    storage: localStorage
+});
+
 export default new Vuex.Store({
     strict: process.env.NODE_ENV !== 'production',
     plugins: [
-        VuexORM.install(database)
+        VuexORM.install(database),
+        vuexLocal.plugin
     ]
 });
