@@ -42,7 +42,9 @@
                     v-for="(entry, index) in feedEntries"
                     :key="index"
                     :title="entry.title"
+                    :description="entry.contentSnippet"
                     :pub-date="entry.pubDate"
+                    :creator="entry.creator"
                 />
             </template>
         </v-card-text>
@@ -109,7 +111,18 @@ export default {
             }
 
             this.errorMsg = null;
-            this.feedEntries = rss.items;
+            this.feedEntries = rss.items.map((item) =>
+            {
+                const date = new Date(item.pubDate);
+                item.pubDate = date.toLocaleDateString('de-DE', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                return item;
+            });
         }
     }
 };
