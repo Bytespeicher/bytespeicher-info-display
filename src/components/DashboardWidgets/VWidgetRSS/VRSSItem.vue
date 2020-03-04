@@ -1,8 +1,8 @@
 <template>
     <v-row dense class="rss-item">
         <v-col cols="12">
-            <div class="subtitle-1 primary--text rss-item-title">{{ title }}</div>
-            <div class="rss-item-description my-1">{{ description | truncate(200) }}</div>
+            <div class="subtitle-1 primary--text rss-item-title mb-2">{{ title }}</div>
+            <div class="rss-item-description">{{ description | truncate(200) }}</div>
             <div class="caption text--secondary">{{ pubDate }} - {{creator}}</div>
         </v-col>
     </v-row>
