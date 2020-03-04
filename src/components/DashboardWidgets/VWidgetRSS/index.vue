@@ -1,5 +1,5 @@
 <template>
-    <v-card height="300px" class="widget-rss">
+    <v-card height="600px" class="widget-rss">
         <div class="body-2 px-4 pt-1 d-flex">
             <div class="flex-grow-1">
                 {{ title }}
