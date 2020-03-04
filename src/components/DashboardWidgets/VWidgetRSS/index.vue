@@ -73,9 +73,13 @@ export default {
     },
     watch: {
         config: {
-            handler(value)
+            handler(value, oldValue)
             {
-                if (!value || !value.rssUrl) { return; }
+                if (
+                    !value ||
+                    !value.rssUrl ||
+                    (oldValue && oldValue.rssUrl === value.rssUrl)
+                ) { return; }
                 this.errorMsg = null;
                 this.feedEntries = null;
                 this.loading = true;
