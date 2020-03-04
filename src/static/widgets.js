@@ -1,4 +1,5 @@
 export default [
     'Text',
-    'RSS'
+    'RSS',
+    'Evag'
 ];
