@@ -78,8 +78,8 @@ export default {
         VDeleteDialog,
         VWidgetsCreateEditDialog,
         VWidgetText: () => import(/* webpackChunkName: "VWidgetText" */ '../components/DashboardWidgets/VWidgetText/index.vue'), // eslint-disable-line
-        VWidgetRSS: () => import(/* webpackChunkName: "VWidgetRss" */ '../components/DashboardWidgets/VWidgetRSS/index.vue'), // eslint-disable-line
-        VWidgetEvag: () => import(/* webpackChunkName: "VWidgetEvag" */ '../components/DashboardWidgets/VWidgetEvag/index.vue') // eslint-disable-line
+        VWidgetRSS: () => import(/* webpackChunkName: "VWidgetRSS" */ '../components/DashboardWidgets/VWidgetRSS/index.vue'), // eslint-disable-line
+        VWidgetVMT: () => import(/* webpackChunkName: "VWidgetVMT" */ '../components/DashboardWidgets/VWidgetVMT/index.vue') // eslint-disable-line
     },
     computed: {
         widgets()
