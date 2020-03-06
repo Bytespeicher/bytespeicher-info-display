@@ -59,11 +59,11 @@ import Parser from 'rss-parser';
 import BaseWidget from '../BaseWidget/index.vue';
 import VConfigDialogFields from './VConfigDialogFields.vue';
 import VRSSItem from './VRSSItem.vue';
+import getCorsUrl from '../../../helpers/getCorsUrl';
 
 const {setInterval, clearInterval} = global;
 
 const parser = new Parser();
-const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
 
 export default {
     name: 'VWidgetRSS',
@@ -113,7 +113,7 @@ export default {
             if (!config || !config.rssUrl) { return; }
             this.errorMsg = null;
             this.loading = true;
-            parser.parseURL(CORS_PROXY + config.rssUrl, this.rssCallback);
+            parser.parseURL(getCorsUrl(config.rssUrl), this.rssCallback);
         },
         rssCallback(err, rss)
         {

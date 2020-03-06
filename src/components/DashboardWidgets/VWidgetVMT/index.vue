@@ -24,8 +24,15 @@
             {{ $t('widgets.general.error.no_configuration') }}
         </v-card-text>
         <v-card-text v-else class="body-1 blue-grey--text text--darken-4">
-            {{ config.text }}
+            los gehts
         </v-card-text>
+
+        <v-progress-linear
+            v-if="loading"
+            class="progress-linear-bottom"
+            indeterminate
+            color="primary"
+        />
 
         <v-widgets-create-edit-dialog
             v-model="showConfigDialog" :id="id"
@@ -36,14 +43,69 @@
 </template>
 
 <script>
+import axios from 'axios';
 import BaseWidget from '../BaseWidget/index.vue';
 import VConfigDialogFields from './VConfigDialogFields.vue';
+import getCorsUrl from '../../../helpers/getCorsUrl';
+
+const stationApi = 'https://evag-live.wla-backend.de/node/v1/departures/';
 
 export default {
     name: 'VWidgetEvag',
     extends: BaseWidget,
     components: {
         VConfigDialogFields
+    },
+    watch: {
+        config: {
+            handler(value, oldValue)
+            {
+                if (
+                    !value ||
+                    !value.station ||
+                    (oldValue && oldValue.station === value.station)
+                ) { return; }
+
+                this.loadDepartures();
+            },
+            deep: true,
+            immediate: true
+        }
+    },
+    data()
+    {
+        return {
+            errorMsg: null,
+            stationEntries: null,
+            loading: false,
+            interval: null
+        };
+    },
+    mounted()
+    {
+        this.interval = setInterval(this.loadDepartures, 300000); // 5 min
+    },
+    beforeDestroy()
+    {
+        clearInterval(this.interval);
+    },
+    methods: {
+        loadDepartures()
+        {
+            const {config} = this;
+
+            if (!config || !config.station) { return; }
+            this.errorMsg = null;
+            this.loading = true;
+
+            axios.get(getCorsUrl(stationApi + config.station))
+                .then(this.axiosResponseHandler);
+        },
+        axiosResponseHandler(response)
+        {
+            this.loading = false;
+            console.log(response);
+        }
     }
 };
 </script>
