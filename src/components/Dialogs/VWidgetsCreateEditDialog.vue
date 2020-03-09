@@ -18,8 +18,6 @@
                             <v-col cols="12">
                                 <v-text-field
                                     :label="$t('widgets.general.form.title')"
-                                    :rules="rules.required"
-                                    required
                                     v-model="models.title"
                                 />
                             </v-col>
