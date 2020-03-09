@@ -69,17 +69,17 @@
 
 <script>
 import Widget from '../store/models/Widget';
-import VWidgetsCreateEditDialog from '../components/DashboardWidgets/VWidgetsCreateEditDialog.vue';
-import VDeleteDialog from '../components/VDeleteDialog.vue';
+import VWidgetsCreateEditDialog from '../components/Dialogs/VWidgetsCreateEditDialog.vue';
+import VDeleteDialog from '../components/Dialogs/VDeleteDialog.vue';
 
 export default {
     name: 'Dashboard',
     components: {
         VDeleteDialog,
         VWidgetsCreateEditDialog,
-        VWidgetText: () => import(/* webpackChunkName: "VWidgetText" */ '../components/DashboardWidgets/VWidgetText/index.vue'), // eslint-disable-line
-        VWidgetRSS: () => import(/* webpackChunkName: "VWidgetRSS" */ '../components/DashboardWidgets/VWidgetRSS/index.vue'), // eslint-disable-line
-        VWidgetVMT: () => import(/* webpackChunkName: "VWidgetVMT" */ '../components/DashboardWidgets/VWidgetVMT/index.vue') // eslint-disable-line
+        VWidgetText: () => import(/* webpackChunkName: "VWidgetText" */ '../components/Widgets/VWidgetText/index.vue'), // eslint-disable-line
+        VWidgetRSS: () => import(/* webpackChunkName: "VWidgetRSS" */ '../components/Widgets/VWidgetRSS/index.vue'), // eslint-disable-line
+        VWidgetVMT: () => import(/* webpackChunkName: "VWidgetVMT" */ '../components/Widgets/VWidgetVMT/index.vue') // eslint-disable-line
     },
     computed: {
         widgets()

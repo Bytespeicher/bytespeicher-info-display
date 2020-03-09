@@ -1,6 +1,6 @@
 <script>
 import Widget from '../../../store/models/Widget';
-import VWidgetsCreateEditDialog from '../VWidgetsCreateEditDialog.vue';
+import VWidgetsCreateEditDialog from '../../Dialogs/VWidgetsCreateEditDialog.vue';
 
 export default {
     name: 'BaseWidget',
