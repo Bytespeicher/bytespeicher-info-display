@@ -5,9 +5,11 @@
             @requestDeletion="$emit('requestDeletion')"
             @requestConfigDialog="showConfigDialog = true"
         />
+
         <v-card-text v-if="!config" class="text-center">
             {{ $t('widgets.general.error.no_configuration') }}
         </v-card-text>
+
         <v-card-text v-else class="body-1 blue-grey--text text--darken-4">
             <template v-if="errorMsg">
                 <span class="res--text">{{ errorMsg }}</span>
