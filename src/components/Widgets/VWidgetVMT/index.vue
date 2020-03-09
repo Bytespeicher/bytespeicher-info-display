@@ -72,7 +72,7 @@ export default {
     },
     mounted()
     {
-        this.interval = setInterval(this.loadDepartures, 300000); // 5 min
+        this.interval = setInterval(this.loadDepartures, 12000000); // 20 min
     },
     beforeDestroy()
     {
@@ -93,7 +93,7 @@ export default {
         axiosResponseHandler(response)
         {
             this.loading = false;
-            this.stationEntries = response.data.departures.slice(0, 20).map(item =>
+            this.stationEntries = response.data.departures.slice(0, 40).map(item =>
                 ({
                     category: item.category,
                     line: item.line,

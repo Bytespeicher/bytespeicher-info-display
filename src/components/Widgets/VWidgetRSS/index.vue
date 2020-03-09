@@ -81,7 +81,7 @@ export default {
     },
     mounted()
     {
-        this.interval = setInterval(this.loadRss, 360000); // 60 min
+        this.interval = setInterval(this.loadRss, 3600000); // 60 min
     },
     beforeDestroy()
     {
