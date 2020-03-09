@@ -17,12 +17,7 @@
             />
         </v-card-text>
 
-        <v-progress-linear
-            v-if="loading"
-            class="progress-linear-bottom"
-            indeterminate
-            color="primary"
-        />
+        <v-widget-loader v-if="loading" />
 
         <v-widgets-create-edit-dialog
             v-model="showConfigDialog" :id="id"
