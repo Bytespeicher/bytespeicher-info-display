@@ -1,25 +1,10 @@
 <template>
     <v-card height="300px" class="widget widget-text">
-        <div class="body-2 px-4 pt-1 d-flex">
-            <div class="flex-grow-1">
-                {{ title }}
-            </div>
-            <div class="widget-actions">
-                <v-btn
-                    icon x-small
-                    class="mr-1"
-                    @click="$emit('requestDeletion')"
-                >
-                    <v-icon>mdi-delete</v-icon>
-                </v-btn>
-                <v-btn
-                    icon x-small
-                    @click="showConfigDialog = true"
-                >
-                    <v-icon>mdi-cogs</v-icon>
-                </v-btn>
-            </div>
-        </div>
+        <v-widget-header
+            :title="title"
+            @requestDeletion="$emit('requestDeletion')"
+            @requestConfigDialog="showConfigDialog = true"
+        />
         <v-card-text v-if="!config" class="text-center">
             {{ $t('widgets.general.error.no_configuration') }}
         </v-card-text>
