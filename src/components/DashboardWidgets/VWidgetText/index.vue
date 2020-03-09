@@ -1,5 +1,5 @@
 <template>
-    <v-card height="300px">
+    <v-card height="300px" class="widget widget-text">
         <div class="body-2 px-4 pt-1 d-flex">
             <div class="flex-grow-1">
                 {{ title }}

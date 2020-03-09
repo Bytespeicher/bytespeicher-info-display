@@ -1,5 +1,5 @@
 <template>
-    <v-card height="300px">
+    <v-card height="300px" class="widget widget-vmt">
         <div class="body-2 px-4 pt-1 d-flex">
             <div class="flex-grow-1">
                 {{ title }}
@@ -24,7 +24,12 @@
             {{ $t('widgets.general.error.no_configuration') }}
         </v-card-text>
         <v-card-text v-else class="body-1 blue-grey--text text--darken-4">
-            los gehts
+            <VDepItem
+                v-for="(entry, index) in stationEntries"
+                :key="index"
+                v-bind="entry"
+                :time-to-walk="config.timeToWalk"
+            />
         </v-card-text>
 
         <v-progress-linear
@@ -46,6 +51,7 @@
 import axios from 'axios';
 import BaseWidget from '../BaseWidget/index.vue';
 import VConfigDialogFields from './VConfigDialogFields.vue';
+import VDepItem from './VDepItem.vue';
 import getCorsUrl from '../../../helpers/getCorsUrl';
 
 const stationApi = 'https://evag-live.wla-backend.de/node/v1/departures/';
@@ -54,7 +60,8 @@ export default {
     name: 'VWidgetEvag',
     extends: BaseWidget,
     components: {
-        VConfigDialogFields
+        VConfigDialogFields,
+        VDepItem
     },
     watch: {
         config: {
@@ -104,7 +111,13 @@ export default {
         axiosResponseHandler(response)
         {
             this.loading = false;
-            console.log(response);
+            this.stationEntries = response.data.departures.slice(0, 20).map(item =>
+                ({
+                    category: item.category,
+                    line: item.line,
+                    target: item.targetLocation,
+                    depTime: item.timestamp_rt * 1000 // milliseconds are missing but required in js
+                }));
         }
     }
 };

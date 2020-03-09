@@ -7,7 +7,18 @@
                     label="Station"
                     :rules="rules.required"
                     v-model="models.station"
-                ></v-autocomplete>
+                />
+            </v-col>
+            <v-col cols="12">
+                <v-text-field
+                    :label="$t('widgets.vvmt.form.time_to_walk')"
+                    :rules="rules.requiredNumber"
+                    required
+                    v-model="models.timeToWalk"
+                    type="number"
+                    :suffix="$t('general.minutes')"
+                    min="1"
+                />
             </v-col>
         </v-row>
     </v-col>
@@ -25,6 +36,10 @@ export default {
         station: {
             type: String,
             default: ''
+        },
+        timeToWalk: {
+            type: Number,
+            default: 10
         }
     },
     data()
@@ -36,6 +51,13 @@ export default {
             rules: {
                 required: [
                     v => !!v || this.$t('general.form.errors.field_is_required')
+                ],
+                requiredNumber: [
+                    v => !!v || this.$t('general.form.errors.field_is_required'),
+                    v =>
+                        Number.isInteger(v) ||
+                        Number.isInteger(parseInt(v, 10)) ||
+                        this.$t('general.form.errors.field_has_to_be_integer')
                 ]
             },
             vmtStations
@@ -61,10 +83,17 @@ export default {
         reset()
         {
             this.models.station = this.station;
+            this.models.timeToWalk = this.timeToWalk;
         },
         save()
         {
-            this.$emit('save', {station: this.models.station});
+            const {station, timeToWalk} = this.models;
+
+            this.$emit('save', {
+                station,
+                stationName: this.vmtStations.find(item => item.value === station).text,
+                timeToWalk: parseInt(timeToWalk, 10)
+            });
         }
     }
 };

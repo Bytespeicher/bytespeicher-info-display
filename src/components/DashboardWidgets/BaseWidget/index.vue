@@ -45,3 +45,9 @@ export default {
     }
 };
 </script>
+
+<style lang="scss">
+.widget {
+    overflow: hidden;
+}
+</style>

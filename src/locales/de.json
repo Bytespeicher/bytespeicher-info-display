@@ -6,10 +6,12 @@
             "abort": "Abbrechen",
             "errors": {
                 "field_is_required": "Dieses Feld ist erforderlich",
-                "field_max_length": "Maximal {size} Zeichen"
+                "field_max_length": "Maximal {size} Zeichen",
+                "field_has_to_be_integer": "Dieses Feld muss eine Zahl sein"
             },
             "deletionWarning": "Diese Aktion kann nicht rückgängig gemacht werden."
-        }
+        },
+        "minutes": "Minuten"
     },
     "view_dashboard": {
         "no_widgets_found": "Es wurden keine Widgets gefunden.",
@@ -43,6 +45,11 @@
         "vrss": {
             "form": {
                 "rssUrl": "Link zum RSS-Feed"
+            }
+        },
+        "vvmt": {
+            "form": {
+                "time_to_walk": "Laufzeit in Minuten"
             }
         }
     }

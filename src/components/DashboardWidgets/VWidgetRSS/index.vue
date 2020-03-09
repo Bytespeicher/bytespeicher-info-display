@@ -1,5 +1,5 @@
 <template>
-    <v-card height="600px" class="widget-rss">
+    <v-card height="600px" class="widget widget-rss">
         <div class="body-2 px-4 pt-1 d-flex">
             <div class="flex-grow-1">
                 {{ title }}
@@ -142,9 +142,3 @@ export default {
     }
 };
 </script>
-
-<style lang="scss">
-.widget-rss {
-    overflow: hidden;
-}
-</style>
