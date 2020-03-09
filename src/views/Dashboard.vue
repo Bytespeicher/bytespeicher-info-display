@@ -77,6 +77,7 @@ export default {
     components: {
         VDeleteDialog,
         VWidgetsCreateEditDialog,
+        VWidgetTime: () => import(/* webpackChunkName: "VWidgetTime" */ '../components/Widgets/VWidgetTime/index.vue'), // eslint-disable-line
         VWidgetText: () => import(/* webpackChunkName: "VWidgetText" */ '../components/Widgets/VWidgetText/index.vue'), // eslint-disable-line
         VWidgetRSS: () => import(/* webpackChunkName: "VWidgetRSS" */ '../components/Widgets/VWidgetRSS/index.vue'), // eslint-disable-line
         VWidgetVMT: () => import(/* webpackChunkName: "VWidgetVMT" */ '../components/Widgets/VWidgetVMT/index.vue') // eslint-disable-line
