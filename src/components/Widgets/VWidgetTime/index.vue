@@ -6,8 +6,9 @@
             @requestConfigDialog="showConfigDialog = true"
         />
 
-        <v-card-text class="display-3 blue-grey--text text--darken-4 text-center pt-6">
-            {{ time }}
+        <v-card-text class="blue-grey--text text--darken-4 text-center pt-2">
+            <span class="display-3">{{ time }}</span><br/>
+            <span class="headline">{{ date }}</span>
         </v-card-text>
 
         <v-widgets-create-edit-dialog
@@ -28,13 +29,14 @@ export default {
     {
         return {
             time: '',
+            date: '',
             interval: null
         };
     },
     mounted()
     {
         this.setTime();
-        this.interval = setInterval(this.setTime, 1000);
+        this.interval = setInterval(this.setTime, 12000); // 12 seconds
     },
     beforeDestroy()
     {
@@ -44,11 +46,18 @@ export default {
         setTime()
         {
             const date = new Date();
-            const hours = date.getHours();
-            const minutes = date.getMinutes();
-            const hString = `${(hours < 10) ? '0' : ''}${hours}`;
-            const mString = `${(minutes < 10) ? '0' : ''}${minutes}`;
-            this.time = `${hString}:${mString}`;
+
+            const dateString = date.toLocaleDateString('de-DE', {
+                weekday: 'long',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            this.time = dateString.slice(-5);
+            this.date = dateString.slice(0, -7);
         }
     }
 };
