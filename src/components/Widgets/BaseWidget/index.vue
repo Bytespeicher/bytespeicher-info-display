@@ -48,13 +48,24 @@ export default {
             {
                 Widget.update({where: this.id, data: {config}});
             }
+        },
+        position: {
+            get()
+            {
+                return this.widget.position;
+            },
+            set(position)
+            {
+                Widget.update({where: this.id, data: {position}});
+            }
         }
     },
     data()
     {
         return {
             openConfigDialogOnFirstStart: true,
-            showConfigDialog: false
+            showConfigDialog: false,
+            drag: null
         };
     },
     mounted()
@@ -71,7 +82,9 @@ export default {
         {
             const {$el} = this;
 
-            Draggable.create(
+            gsap.set($el, this.position);
+
+            const dragArray = Draggable.create(
                 $el,
                 {
                     type: 'x,y',
@@ -88,9 +101,16 @@ export default {
                             const {height} = this.grid;
                             return Math.round(value / height) * height;
                         }
+                    },
+                    onRelease: () =>
+                    {
+                        const {x, y} = this.drag;
+                        this.position = {x, y};
                     }
                 }
             );
+
+            this.drag = dragArray[0]; // eslint-disable-line
         }
     }
 };
