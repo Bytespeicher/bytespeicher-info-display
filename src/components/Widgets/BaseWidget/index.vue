@@ -1,13 +1,13 @@
 <script>
 import Widget from '../../../store/models/Widget';
-import VWidgetsCreateEditDialog from '../../Dialogs/VWidgetsCreateEditDialog.vue';
+import VWidgetsEditDialog from '../../Dialogs/VWidgetsEditDialog.vue';
 import VWidgetHeader from './VWidgetHeader.vue';
 import VWidgetLoader from './VWidgetLoader.vue';
 
 export default {
     name: 'BaseWidget',
     components: {
-        VWidgetsCreateEditDialog,
+        VWidgetsEditDialog,
         VWidgetHeader,
         VWidgetLoader
     },
@@ -46,6 +46,13 @@ export default {
         return {
             showConfigDialog: false
         };
+    },
+    mounted()
+    {
+        if (!this.widget.firstCreation) { return; }
+        Widget.update({where: this.id, data: {firstCreation: false}});
+
+        this.showConfigDialog = true;
     }
 };
 </script>

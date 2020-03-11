@@ -8,7 +8,7 @@
         <v-card>
             <v-card-title>
                 <span class="headline">
-                    {{ $t(`widgets.general.form.header.${id === null ? 'create' : 'edit'}`) }}
+                    {{ $t('widgets.general.form.header.edit') }}
                 </span>
             </v-card-title>
             <v-form ref="form" v-model="valid">
@@ -19,33 +19,6 @@
                                 <v-text-field
                                     :label="$t('widgets.general.form.title')"
                                     v-model="models.title"
-                                />
-                            </v-col>
-                            <v-col v-if="!id" cols="12">
-                                <v-select
-                                    :items="widgetTypes"
-                                    :label="$t('widgets.general.form.type')"
-                                    :rules="rules.required"
-                                    required
-                                    v-model="models.type"
-                                />
-                            </v-col>
-                            <v-col cols="6">
-                                <v-select
-                                    :items="widgetsWidths"
-                                    :label="$t('widgets.general.form.width')"
-                                    :rules="rules.required"
-                                    required
-                                    v-model="models.cols"
-                                />
-                            </v-col>
-                            <v-col cols="6">
-                                <v-select
-                                    :items="widgetsOffset"
-                                    :label="$t('widgets.general.form.offset')"
-                                    :rules="rules.required"
-                                    required
-                                    v-model="models.offset"
                                 />
                             </v-col>
 
@@ -76,17 +49,15 @@
 <script>
 import Widget from '../../store/models/Widget';
 
-import widgetTypes from '../../static/widgets';
-
 export default {
-    name: 'VWidgetsCreateEditDialog',
+    name: 'VWidgetsEditDialog',
     props: {
         value: {
             type: Boolean
         },
         id: {
             type: String,
-            default: null
+            required: true
         }
     },
     computed: {
@@ -105,14 +76,9 @@ export default {
     {
         return {
             valid: true,
-            widgetTypes,
-            widgetsWidths: ['2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-            widgetsOffset: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
             models: {
                 title: '',
-                type: 'Text',
-                cols: '4',
-                offset: '0'
+                type: ''
             },
             rules: {
                 required: [v => !!v || this.$t('general.form.errors.field_is_required')]
@@ -124,11 +90,6 @@ export default {
             handler(value)
             {
                 if (!value) { return; }
-                if (!this.id)
-                {
-                    this.reset();
-                    return;
-                }
 
                 const widget = Widget.find(this.id);
                 this.models.title = widget.title;
@@ -150,35 +111,10 @@ export default {
     },
     methods:
     {
-        reset()
-        {
-            const {form} = this.$refs;
-            if (!form) { return; }
-            form.reset();
-
-            this.$nextTick(() =>
-            {
-                this.models.title = '';
-                this.models.type = 'Text';
-                this.models.cols = '4';
-                this.models.offset = '0';
-            });
-        },
         save()
         {
             const {models} = this;
             const data = {...models};
-            if (!this.id)
-            {
-                Widget.insert({data})
-                    .then(this.clearForm)
-                    .then(() =>
-                    {
-                        this.reset();
-                        this.show = false;
-                    });
-                return;
-            }
 
             if (this.$slots.default)
             {

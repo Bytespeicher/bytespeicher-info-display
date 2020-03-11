@@ -11,7 +11,7 @@
             <span class="headline">{{ date }}</span>
         </v-card-text>
 
-        <v-widgets-create-edit-dialog
+        <v-widgets-edit-dialog
             v-model="showConfigDialog" :id="id"
         />
     </v-card>

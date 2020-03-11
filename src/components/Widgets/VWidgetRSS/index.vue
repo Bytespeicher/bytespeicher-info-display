@@ -28,11 +28,11 @@
 
         <v-widget-loader v-if="loading" />
 
-        <v-widgets-create-edit-dialog
+        <v-widgets-edit-dialog
             v-model="showConfigDialog" :id="id"
         >
             <v-config-dialog-fields v-bind="config" @save="config = $event"/>
-        </v-widgets-create-edit-dialog>
+        </v-widgets-edit-dialog>
     </v-card>
 </template>
 

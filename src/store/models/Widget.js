@@ -8,8 +8,7 @@ export default class Widget extends Model
     {
         return {
             id: this.uid(),
-            cols: this.attr(null),
-            offset: this.attr(null),
+            firstCreation: this.attr(null),
             type: this.attr(null),
             title: this.attr(null),
             config: this.attr(null)

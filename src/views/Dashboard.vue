@@ -40,8 +40,7 @@
                 <v-col
                     v-for="(widget) in widgets"
                     :key="widget.id"
-                    :cols="widget.cols"
-                    :offset="widget.offset"
+                    class="flex-grow-0 flex-shrink-0"
                 >
                     <component
                         :is="`VWidget${widget.type}`"
@@ -52,9 +51,7 @@
             </v-row>
         </template>
 
-        <v-widgets-create-edit-dialog
-            v-model="showCreateDialog"
-        />
+        <v-widgets-create-dialog v-model="showCreateDialog" />
 
         <v-delete-dialog
             v-model="showDeleteModal" @deletionConfirmed="deleteConfirmation"
@@ -69,14 +66,14 @@
 
 <script>
 import Widget from '../store/models/Widget';
-import VWidgetsCreateEditDialog from '../components/Dialogs/VWidgetsCreateEditDialog.vue';
+import VWidgetsCreateDialog from '../components/Dialogs/VWidgetsCreateDialog.vue';
 import VDeleteDialog from '../components/Dialogs/VDeleteDialog.vue';
 
 export default {
     name: 'Dashboard',
     components: {
         VDeleteDialog,
-        VWidgetsCreateEditDialog,
+        VWidgetsCreateDialog,
         VWidgetTime: () => import(/* webpackChunkName: "VWidgetTime" */ '../components/Widgets/VWidgetTime/index.vue'), // eslint-disable-line
         VWidgetText: () => import(/* webpackChunkName: "VWidgetText" */ '../components/Widgets/VWidgetText/index.vue'), // eslint-disable-line
         VWidgetRSS: () => import(/* webpackChunkName: "VWidgetRSS" */ '../components/Widgets/VWidgetRSS/index.vue'), // eslint-disable-line
@@ -123,6 +120,7 @@ export default {
 
 .add-card {
     height: 164px;
+
     > .v-icon {
         font-size: 72px;
     }
