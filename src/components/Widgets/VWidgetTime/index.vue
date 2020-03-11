@@ -1,24 +1,23 @@
 <template>
-    <v-card
-        :height="height" :width="width"
-        class="widget widget-text"
-    >
-        <v-widget-header
-            ref="header"
-            :title="title"
-            @requestDeletion="$emit('requestDeletion')"
-            @requestConfigDialog="showConfigDialog = true"
-        />
+    <div class="widget widget-time" :style="{width, height}">
+        <v-card class="widget-card">
+            <v-widget-header
+                ref="header"
+                :title="title"
+                @requestDeletion="$emit('requestDeletion')"
+                @requestConfigDialog="showConfigDialog = true"
+            />
 
-        <v-card-text class="blue-grey--text text--darken-4 text-center pt-7">
-            <span class="display-3">{{ time }}</span><br/>
-            <span class="headline">{{ date }}</span>
-        </v-card-text>
+            <v-card-text class="blue-grey--text text--darken-4 text-center pt-7">
+                <span class="display-3">{{ time }}</span><br/>
+                <span class="headline">{{ date }}</span>
+            </v-card-text>
 
-        <v-widgets-edit-dialog
-            v-model="showConfigDialog" :id="id"
-        />
-    </v-card>
+            <v-widgets-edit-dialog
+                v-model="showConfigDialog" :id="id"
+            />
+        </v-card>
+    </div>
 </template>
 
 <script>

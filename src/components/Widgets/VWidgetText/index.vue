@@ -1,29 +1,28 @@
 <template>
-    <v-card
-        :height="height" :width="width"
-        class="widget widget-text"
-    >
-        <v-widget-header
-            ref="header"
-            :title="title"
-            @requestDeletion="$emit('requestDeletion')"
-            @requestConfigDialog="showConfigDialog = true"
-        />
+    <div class="widget widget-text" :style="{width, height}">
+        <v-card class="widget-card">
+            <v-widget-header
+                ref="header"
+                :title="title"
+                @requestDeletion="$emit('requestDeletion')"
+                @requestConfigDialog="showConfigDialog = true"
+            />
 
-        <v-card-text v-if="!config" class="text-center">
-            {{ $t('widgets.general.error.no_configuration') }}
-        </v-card-text>
+            <v-card-text v-if="!config" class="text-center">
+                {{ $t('widgets.general.error.no_configuration') }}
+            </v-card-text>
 
-        <v-card-text v-else class="body-1 blue-grey--text text--darken-4">
-            {{ config.text }}
-        </v-card-text>
+            <v-card-text v-else class="body-1 blue-grey--text text--darken-4">
+                {{ config.text }}
+            </v-card-text>
 
-        <v-widgets-edit-dialog
-            v-model="showConfigDialog" :id="id"
-        >
-            <v-config-dialog-fields v-bind="config" @save="config = $event"/>
-        </v-widgets-edit-dialog>
-    </v-card>
+            <v-widgets-edit-dialog
+                v-model="showConfigDialog" :id="id"
+            >
+                <v-config-dialog-fields v-bind="config" @save="config = $event"/>
+            </v-widgets-edit-dialog>
+        </v-card>
+    </div>
 </template>
 
 <script>

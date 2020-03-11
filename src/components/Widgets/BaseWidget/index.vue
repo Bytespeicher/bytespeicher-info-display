@@ -121,6 +121,13 @@ export default {
     position: absolute;
     left: 0;
     top: 0;
-    overflow: hidden;
+    padding: 5px;
+    box-sizing: border-box;
+
+    .widget-card {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
 }
 </style>
