@@ -4,6 +4,7 @@
         class="widget widget-rss"
     >
         <v-widget-header
+            ref="header"
             :title="title"
             @requestDeletion="$emit('requestDeletion')"
             @requestConfigDialog="showConfigDialog = true"

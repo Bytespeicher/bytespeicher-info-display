@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid>
+    <div class="dashboard">
         <v-tooltip top>
             <template v-slot:activator="{ on }">
                 <v-btn
@@ -36,19 +36,15 @@
             </div>
         </template>
         <template v-else>
-            <v-row>
-                <v-col
+            <div class="widgets-wrapper">
+                <component
                     v-for="(widget) in widgets"
                     :key="widget.id"
-                    class="flex-grow-0 flex-shrink-0"
-                >
-                    <component
-                        :is="`VWidget${widget.type}`"
-                        :id="widget.id"
-                        @requestDeletion="openDeleteDialog(widget.id)"
-                    />
-                </v-col>
-            </v-row>
+                    :is="`VWidget${widget.type}`"
+                    :id="widget.id"
+                    @requestDeletion="openDeleteDialog(widget.id)"
+                />
+            </div>
         </template>
 
         <v-widgets-create-dialog v-model="showCreateDialog" />
@@ -61,7 +57,7 @@
             </template>
         </v-delete-dialog>
 
-    </v-container>
+    </div>
 </template>
 
 <script>
@@ -113,16 +109,28 @@ export default {
 </script>
 
 <style lang="scss">
-.creation-fab {
-    bottom: 6px;
-    right: 4px;
-}
+.dashboard {
+    width: 100%;
+    height: 100%;
 
-.add-card {
-    height: 164px;
+    .creation-fab {
+        bottom: 6px;
+        right: 4px;
+    }
 
-    > .v-icon {
-        font-size: 72px;
+    .add-card {
+        height: 164px;
+
+        > .v-icon {
+            font-size: 72px;
+        }
+    }
+
+    .widgets-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
     }
 }
+
 </style>

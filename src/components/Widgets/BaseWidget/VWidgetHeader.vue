@@ -13,9 +13,15 @@
             </v-btn>
             <v-btn
                 icon x-small
+                class="mr-1"
                 @click="$emit('requestConfigDialog')"
             >
                 <v-icon>mdi-cogs</v-icon>
+            </v-btn>
+            <v-btn
+                icon x-small
+            >
+                <v-icon>mdi-drag-variant</v-icon>
             </v-btn>
         </div>
     </div>

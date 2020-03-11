@@ -4,6 +4,7 @@
         class="widget widget-text"
     >
         <v-widget-header
+            ref="header"
             :title="title"
             @requestDeletion="$emit('requestDeletion')"
             @requestConfigDialog="showConfigDialog = true"
