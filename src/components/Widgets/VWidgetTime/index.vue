@@ -1,12 +1,15 @@
 <template>
-    <v-card height="140px" class="widget widget-text">
+    <v-card
+        :height="height" :width="width"
+        class="widget widget-text"
+    >
         <v-widget-header
             :title="title"
             @requestDeletion="$emit('requestDeletion')"
             @requestConfigDialog="showConfigDialog = true"
         />
 
-        <v-card-text class="blue-grey--text text--darken-4 text-center pt-2">
+        <v-card-text class="blue-grey--text text--darken-4 text-center pt-7">
             <span class="display-3">{{ time }}</span><br/>
             <span class="headline">{{ date }}</span>
         </v-card-text>
@@ -25,12 +28,27 @@ const {setInterval, clearInterval} = global;
 export default {
     name: 'VWidgetTime',
     extends: BaseWidget,
+    computed: {
+        height: {
+            get()
+            {
+                return `${this.grid.height * 2}px`;
+            }
+        },
+        width: {
+            get()
+            {
+                return `${this.grid.width * 2}px`;
+            }
+        }
+    },
     data()
     {
         return {
             time: '',
             date: '',
-            interval: null
+            interval: null,
+            openConfigDialogOnFirstStart: false
         };
     },
     mounted()

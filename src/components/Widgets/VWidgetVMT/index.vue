@@ -1,5 +1,8 @@
 <template>
-    <v-card height="300px" class="widget widget-vmt">
+    <v-card
+        :height="height" :width="width"
+        class="widget widget-vmt"
+    >
         <v-widget-header
             :title="title"
             @requestDeletion="$emit('requestDeletion')"
@@ -44,6 +47,20 @@ export default {
     components: {
         VConfigDialogFields,
         VDepItem
+    },
+    computed: {
+        height: {
+            get()
+            {
+                return `${this.grid.height * 4}px`;
+            }
+        },
+        width: {
+            get()
+            {
+                return `${this.grid.width * 3}px`;
+            }
+        }
     },
     watch: {
         config: {

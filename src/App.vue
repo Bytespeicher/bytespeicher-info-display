@@ -11,7 +11,25 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
+
 export default {
+    name: 'App',
+    computed: {
+        ...mapGetters({
+            selectedLanguage: 'settings/generalSelectedLanguage'
+        })
+    },
+    watch: {
+        selectedLanguage: {
+            handler(val)
+            {
+                this.$root.$i18n.locale = val;
+            },
+            immediate: true
+        }
+    }
+
 };
 </script>
 

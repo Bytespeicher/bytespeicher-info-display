@@ -1,4 +1,5 @@
 <script>
+import {mapGetters} from 'vuex';
 import Widget from '../../../store/models/Widget';
 import VWidgetsEditDialog from '../../Dialogs/VWidgetsEditDialog.vue';
 import VWidgetHeader from './VWidgetHeader.vue';
@@ -18,6 +19,9 @@ export default {
         }
     },
     computed: {
+        ...mapGetters({
+            grid: 'settings/gridSize'
+        }),
         widget: {
             get()
             {
@@ -44,12 +48,13 @@ export default {
     data()
     {
         return {
+            openConfigDialogOnFirstStart: true,
             showConfigDialog: false
         };
     },
     mounted()
     {
-        if (!this.widget.firstCreation) { return; }
+        if (!this.openConfigDialogOnFirstStart || !this.widget.firstCreation) { return; }
         Widget.update({where: this.id, data: {firstCreation: false}});
 
         this.showConfigDialog = true;

@@ -1,5 +1,8 @@
 <template>
-    <v-card height="600px" class="widget widget-rss">
+    <v-card
+        :height="height" :width="width"
+        class="widget widget-rss"
+    >
         <v-widget-header
             :title="title"
             @requestDeletion="$emit('requestDeletion')"
@@ -68,6 +71,20 @@ export default {
             },
             deep: true,
             immediate: true
+        }
+    },
+    computed: {
+        height: {
+            get()
+            {
+                return `${this.grid.height * 6}px`;
+            }
+        },
+        width: {
+            get()
+            {
+                return `${this.grid.width * 2}px`;
+            }
         }
     },
     data()
