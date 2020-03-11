@@ -110,8 +110,9 @@ export default {
 
 <style lang="scss">
 .dashboard {
-    width: 100%;
-    height: 100%;
+    width: calc(100% - 20px);
+    height: calc(100vh - 20px);
+    margin: 10px;
 
     .creation-fab {
         bottom: 6px;
@@ -130,6 +131,7 @@ export default {
         position: relative;
         width: 100%;
         height: 100%;
+        z-index: 1;
     }
 }
 

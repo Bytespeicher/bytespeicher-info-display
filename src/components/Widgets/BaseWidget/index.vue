@@ -76,7 +76,19 @@ export default {
                 {
                     type: 'x,y',
                     bounds: $el.parentNode,
-                    trigger: this.$refs.header.$el
+                    trigger: this.$refs.header.$el,
+                    liveSnap: {
+                        x: (value) =>
+                        {
+                            const {width} = this.grid;
+                            return Math.round(value / width) * width;
+                        },
+                        y: (value) =>
+                        {
+                            const {height} = this.grid;
+                            return Math.round(value / height) * height;
+                        }
+                    }
                 }
             );
         }
