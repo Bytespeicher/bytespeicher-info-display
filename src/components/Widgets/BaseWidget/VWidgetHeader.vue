@@ -1,5 +1,5 @@
 <template>
-    <div class="body-2 px-4 pt-1 d-flex">
+    <div class="widget-header body-2 pl-4 pr-2 pt-1 d-flex">
         <div class="flex-grow-1">
             {{ title }}
         </div>
@@ -19,6 +19,7 @@
                 <v-icon>mdi-cogs</v-icon>
             </v-btn>
             <v-btn
+                class="drag-button"
                 icon x-small
             >
                 <v-icon>mdi-drag-variant</v-icon>
@@ -38,3 +39,13 @@ export default {
     }
 };
 </script>
+
+<style lang="scss">
+.widget-header {
+    > .widget-actions {
+        > .drag-button {
+            pointer-events: none;
+        }
+    }
+}
+</style>
