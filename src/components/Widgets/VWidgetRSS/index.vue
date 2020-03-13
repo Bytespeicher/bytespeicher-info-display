@@ -12,6 +12,10 @@
                 {{ $t('widgets.general.error.no_configuration') }}
             </v-card-text>
 
+            <v-card-text v-if="errorMsg" class="text-center title font-weight-regular red--text">
+                {{ errorMsg }}
+            </v-card-text>
+
             <v-card-text v-else class="body-1 blue-grey--text text--darken-4">
                 <template v-if="errorMsg">
                     <span class="res--text">{{ errorMsg }}</span>
@@ -120,7 +124,7 @@ export default {
 
             if (err)
             {
-                this.errorMsg = err;
+                this.errorCodeHandler(err.toString().slice(-3));
                 return;
             }
 

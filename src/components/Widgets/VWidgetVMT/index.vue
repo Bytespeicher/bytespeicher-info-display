@@ -12,6 +12,10 @@
                 {{ $t('widgets.general.error.no_configuration') }}
             </v-card-text>
 
+            <v-card-text v-if="errorMsg" class="text-center title font-weight-regular red--text">
+                {{ errorMsg }}
+            </v-card-text>
+
             <v-card-text v-else class="body-1 blue-grey--text text--darken-4">
                 <VDepItem
                     v-for="(entry, index) in stationEntries"
@@ -81,7 +85,6 @@ export default {
     data()
     {
         return {
-            errorMsg: null,
             stationEntries: null,
             loading: false,
             interval: null
@@ -110,12 +113,19 @@ export default {
         axiosResponseHandler(response)
         {
             this.loading = false;
+
+            if (!response.data.departures)
+            {
+                this.errorMsg = this.$t('widgets.vvmt.error.no_departures');
+                return;
+            }
+
             this.stationEntries = response.data.departures.slice(0, 40).map(item =>
                 ({
                     category: item.category,
                     line: item.line,
                     target: item.targetLocation,
-                    depTime: item.timestamp_rt * 1000 // milliseconds are missing but required in js
+                    depTime: item.timestamp * 1000 // milliseconds are missing but required in js
                 }));
         }
     }

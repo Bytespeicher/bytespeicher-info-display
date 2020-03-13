@@ -20,7 +20,8 @@
     "widgets": {
         "general": {
             "error": {
-                "no_configuration": "Hier fehlt noch eine Konfiguration"
+                "no_configuration": "Hier fehlt noch eine Konfiguration",
+                "404": "URL konnte nicht aufgelöst werden"
             },
             "headers": {
                 "config": "Konfiguration",
@@ -50,6 +51,9 @@
         "vvmt": {
             "form": {
                 "time_to_walk": "Laufzeit in Minuten"
+            },
+            "error": {
+                "no_departures": "Es konnten keine Abfahrtszeiten ermittelt werden."
             }
         }
     }

@@ -49,7 +49,7 @@ export default {
         reset()
         {
             this.models.title = this.title;
-            this.configModels.rssUrl = this.rssUrl;
+            this.models.rssUrl = this.rssUrl;
         },
         save()
         {

@@ -69,7 +69,8 @@ export default {
         return {
             openConfigDialogOnFirstStart: true,
             showConfigDialog: false,
-            drag: null
+            drag: null,
+            errorMsg: null
         };
     },
     mounted()
@@ -124,6 +125,10 @@ export default {
             {
                 this.config = data.config;
             }
+        },
+        errorCodeHandler(code)
+        {
+            this.errorMsg = this.$t(`widgets.general.error.${code}`);
         }
     }
 };
