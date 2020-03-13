@@ -37,6 +37,10 @@ export default {
             get()
             {
                 return this.widget.title;
+            },
+            set(title)
+            {
+                Widget.update({where: this.id, data: {title}});
             }
         },
         config: {
@@ -111,6 +115,15 @@ export default {
             );
 
             this.drag = dragArray[0]; // eslint-disable-line
+        },
+        saveHandler(data)
+        {
+            this.showConfigDialog = false;
+
+            if (data.config)
+            {
+                this.config = data.config;
+            }
         }
     }
 };

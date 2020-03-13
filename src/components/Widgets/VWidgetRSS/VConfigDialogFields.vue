@@ -3,6 +3,13 @@
         <v-row dense>
             <v-col cols="12">
                 <v-text-field
+                    :label="$t('widgets.general.form.title')"
+                    v-model="models.title"
+                />
+            </v-col>
+
+            <v-col cols="12">
+                <v-text-field
                     :label="$t('widgets.vrss.form.rssUrl')"
                     :rules="rules.required"
                     required
@@ -20,12 +27,17 @@ export default {
         rssUrl: {
             type: String,
             default: ''
+        },
+        title: {
+            type: String,
+            default: ''
         }
     },
     data()
     {
         return {
             models: {
+                title: '',
                 rssUrl: ''
             },
             rules: {
@@ -36,11 +48,13 @@ export default {
     methods: {
         reset()
         {
-            this.models.rssUrl = this.rssUrl;
+            this.models.title = this.title;
+            this.configModels.rssUrl = this.rssUrl;
         },
         save()
         {
-            this.$emit('save', {rssUrl: this.models.rssUrl});
+            const {models: config} = this;
+            this.$emit('save', {config});
         }
     }
 };

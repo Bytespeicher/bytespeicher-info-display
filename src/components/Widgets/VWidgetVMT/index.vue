@@ -3,7 +3,7 @@
         <v-card class="widget-card">
             <v-widget-header
                 ref="header"
-                :title="title"
+                :title="(config) ? config.title : ''"
                 @requestDeletion="$emit('requestDeletion')"
                 @requestConfigDialog="showConfigDialog = true"
             />
@@ -26,7 +26,7 @@
             <v-widgets-edit-dialog
                 v-model="showConfigDialog" :id="id"
             >
-                <v-config-dialog-fields v-bind="config" @save="config = $event"/>
+                <v-config-dialog-fields v-bind="config" @save="saveHandler"/>
             </v-widgets-edit-dialog>
         </v-card>
     </div>

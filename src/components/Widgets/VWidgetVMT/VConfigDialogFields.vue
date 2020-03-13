@@ -46,7 +46,8 @@ export default {
     {
         return {
             models: {
-                station: ''
+                station: '',
+                timeToWalk: 10
             },
             rules: {
                 required: [
@@ -90,9 +91,11 @@ export default {
             const {station, timeToWalk} = this.models;
 
             this.$emit('save', {
-                station,
-                stationName: this.vmtStations.find(item => item.value === station).text,
-                timeToWalk: parseInt(timeToWalk, 10)
+                config: {
+                    station,
+                    title: this.vmtStations.find(item => item.value === station).text,
+                    timeToWalk: parseInt(timeToWalk, 10)
+                }
             });
         }
     }

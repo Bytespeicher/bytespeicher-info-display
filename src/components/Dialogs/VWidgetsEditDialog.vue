@@ -15,13 +15,6 @@
                 <v-card-text class="py-0">
                     <v-container>
                         <v-row dense>
-                            <v-col cols="12">
-                                <v-text-field
-                                    :label="$t('widgets.general.form.title')"
-                                    v-model="models.title"
-                                />
-                            </v-col>
-
                             <slot />
                         </v-row>
                     </v-container>
@@ -47,8 +40,6 @@
 </template>
 
 <script>
-import Widget from '../../store/models/Widget';
-
 export default {
     name: 'VWidgetsEditDialog',
     props: {
@@ -75,14 +66,7 @@ export default {
     data()
     {
         return {
-            valid: true,
-            models: {
-                title: '',
-                type: ''
-            },
-            rules: {
-                required: [v => !!v || this.$t('general.form.errors.field_is_required')]
-            }
+            valid: true
         };
     },
     watch: {
@@ -91,20 +75,14 @@ export default {
             {
                 if (!value) { return; }
 
-                const widget = Widget.find(this.id);
-                this.models.title = widget.title;
-                this.models.type = widget.type;
-                this.models.cols = widget.cols;
-                this.models.offset = widget.offset;
-
                 this.$nextTick(() =>
                 {
-                    this.$refs.form.validate(true);
-
                     if (this.$slots.default)
                     {
                         this.$slots.default[0].componentInstance.reset();
                     }
+
+                    this.$refs.form.validate(true);
                 });
             }
         }
@@ -113,19 +91,10 @@ export default {
     {
         save()
         {
-            const {models} = this;
-            const data = {...models};
-
             if (this.$slots.default)
             {
                 this.$slots.default[0].componentInstance.save();
             }
-
-            Widget.update({where: this.id, data})
-                .then(() =>
-                {
-                    this.show = false;
-                });
         }
     }
 };

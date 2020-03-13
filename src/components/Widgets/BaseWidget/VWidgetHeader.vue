@@ -12,6 +12,7 @@
                 <v-icon>mdi-delete</v-icon>
             </v-btn>
             <v-btn
+                v-if="!removeSettings"
                 icon x-small
                 class="mr-1"
                 @click="$emit('requestConfigDialog')"
@@ -35,6 +36,10 @@ export default {
         title: {
             type: String,
             default: ''
+        },
+        removeSettings: {
+            type: Boolean,
+            default: false
         }
     }
 };
