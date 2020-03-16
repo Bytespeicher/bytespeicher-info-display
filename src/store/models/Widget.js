@@ -1,5 +1,7 @@
 import {Model} from '@vuex-orm/core';
 
+let increment = 0;
+
 export default class Widget extends Model
 {
     static entity = 'widget'
@@ -7,7 +9,7 @@ export default class Widget extends Model
     static fields()
     {
         return {
-            id: this.uid(),
+            id: this.uid(() => `${new Date().getTime()}_${increment++}`),
             firstCreation: this.attr(null),
             type: this.attr(null),
             config: this.attr(null),
