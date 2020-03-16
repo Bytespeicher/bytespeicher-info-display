@@ -8,12 +8,12 @@
                 @requestConfigDialog="showConfigDialog = true"
             />
 
-            <v-card-text v-if="!config" class="text-center">
-                {{ $t('widgets.general.error.no_configuration') }}
+            <v-card-text v-if="config" class="body-1 blue-grey--text text--darken-4">
+                {{ config.text }}
             </v-card-text>
 
-            <v-card-text v-else class="body-1 blue-grey--text text--darken-4">
-                {{ config.text }}
+            <v-card-text v-else class="text-center">
+                {{ $t('widgets.general.error.no_configuration') }}
             </v-card-text>
 
             <v-widgets-edit-dialog

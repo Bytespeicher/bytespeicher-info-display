@@ -8,15 +8,11 @@
                 @requestConfigDialog="showConfigDialog = true"
             />
 
-            <v-card-text v-if="!config" class="text-center">
-                {{ $t('widgets.general.error.no_configuration') }}
-            </v-card-text>
-
             <v-card-text v-if="errorMsg" class="text-center title font-weight-regular red--text">
                 {{ errorMsg }}
             </v-card-text>
 
-            <v-card-text v-else class="body-1 blue-grey--text text--darken-4">
+            <v-card-text v-if="config" class="body-1 blue-grey--text text--darken-4">
                 <template v-if="errorMsg">
                     <span class="res--text">{{ errorMsg }}</span>
                 </template>
@@ -30,6 +26,10 @@
                         :creator="entry.creator"
                     />
                 </template>
+            </v-card-text>
+
+            <v-card-text v-else class="text-center">
+                {{ $t('widgets.general.error.no_configuration') }}
             </v-card-text>
 
             <v-widget-loader v-if="loading" />
