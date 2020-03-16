@@ -129,6 +129,11 @@ export default {
         errorCodeHandler(code)
         {
             this.errorMsg = this.$t(`widgets.general.error.${code}`);
+        },
+        axiosErrorHandler(error)
+        {
+            this.loading = false;
+            this.errorCodeHandler(error.response.status);
         }
     }
 };

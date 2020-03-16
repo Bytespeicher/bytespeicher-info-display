@@ -1,5 +1,5 @@
 <template>
-    <div class="widget widget-vmt" :style="{width, height}">
+    <div class="widget widget-weather" :style="{width, height}">
         <v-card class="widget-card">
             <v-widget-header
                 ref="header"
@@ -13,13 +13,9 @@
             </v-card-text>
 
             <v-card-text v-if="config" class="body-1 blue-grey--text text--darken-4">
-                <VDepItem
-                    v-for="(entry, index) in stationEntries"
-                    :key="index"
-                    v-bind="entry"
-                    :time-to-walk="config.timeToWalk"
-                />
+                wetter supi
             </v-card-text>
+
             <v-card-text v-else class="text-center">
                 {{ $t('widgets.general.error.no_configuration') }}
             </v-card-text>
@@ -39,17 +35,15 @@
 import axios from 'axios';
 import BaseWidget from '../BaseWidget/index.vue';
 import VConfigDialogFields from './VConfigDialogFields.vue';
-import VDepItem from './VDepItem.vue';
 import getCorsUrl from '../../../helpers/getCorsUrl';
 
-const stationApi = 'https://evag-live.wla-backend.de/node/v1/departures/';
+const weatherapi = 'https://api.openweathermap.org/data/2.5/weather';
 
 export default {
-    name: 'VWidgetEvag',
+    name: 'VWidgetWeather',
     extends: BaseWidget,
     components: {
-        VConfigDialogFields,
-        VDepItem
+        VConfigDialogFields
     },
     computed: {
         height: {
@@ -61,7 +55,7 @@ export default {
         width: {
             get()
             {
-                return `${this.grid.width * 3}px`;
+                return `${this.grid.width * 2}px`;
             }
         }
     },
@@ -75,7 +69,7 @@ export default {
                     (oldValue && oldValue.station === value.station)
                 ) { return; }
 
-                this.loadDepartures();
+                this.loadWeather();
             },
             deep: true,
             immediate: true
@@ -84,49 +78,39 @@ export default {
     data()
     {
         return {
-            stationEntries: null,
             loading: false,
             interval: null
         };
     },
     mounted()
     {
-        this.interval = setInterval(this.loadDepartures, 12000000); // 20 min
+        this.interval = setInterval(this.loadWeather, 12000000); // 20 min
     },
     beforeDestroy()
     {
         clearInterval(this.interval);
     },
     methods: {
-        loadDepartures()
+        loadWeather()
         {
             const {config} = this;
 
-            if (!config || !config.station) { return; }
+            if (!config || !config.station || !config.weatherApiKey) { return; }
             this.errorMsg = null;
             this.loading = true;
 
-            axios.get(getCorsUrl(stationApi + config.station))
+            const {station, weatherApiKey} = config;
+
+            const url = `${weatherapi}?q=${station}&units=metric&appid=${weatherApiKey}`;
+
+            axios.get(getCorsUrl(url))
                 .then(this.axiosResponseHandler)
                 .catch(this.axiosErrorHandler);
         },
         axiosResponseHandler(response)
         {
             this.loading = false;
-
-            if (!response.data.departures)
-            {
-                this.errorMsg = this.$t('widgets.vvmt.error.no_departures');
-                return;
-            }
-
-            this.stationEntries = response.data.departures.slice(0, 40).map(item =>
-                ({
-                    category: item.category,
-                    line: item.line,
-                    target: item.targetLocation,
-                    depTime: item.timestamp * 1000 // milliseconds are missing but required in js
-                }));
+            console.log(response);
         }
     }
 };

@@ -21,6 +21,7 @@
         "general": {
             "error": {
                 "no_configuration": "Hier fehlt noch eine Konfiguration",
+                "401": "401 Unauthorized",
                 "404": "URL konnte nicht aufgelöst werden"
             },
             "headers": {
@@ -54,6 +55,12 @@
             },
             "error": {
                 "no_departures": "Es konnten keine Abfahrtszeiten ermittelt werden."
+            }
+        },
+        "vweather": {
+            "form": {
+                "api_key": "OpenWeather API-Key",
+                "city": "Stadtname"
             }
         }
     }

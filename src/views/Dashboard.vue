@@ -73,7 +73,8 @@ export default {
         VWidgetTime: () => import(/* webpackChunkName: "VWidgetTime" */ '../components/Widgets/VWidgetTime/index.vue'), // eslint-disable-line
         VWidgetText: () => import(/* webpackChunkName: "VWidgetText" */ '../components/Widgets/VWidgetText/index.vue'), // eslint-disable-line
         VWidgetRSS: () => import(/* webpackChunkName: "VWidgetRSS" */ '../components/Widgets/VWidgetRSS/index.vue'), // eslint-disable-line
-        VWidgetVMT: () => import(/* webpackChunkName: "VWidgetVMT" */ '../components/Widgets/VWidgetVMT/index.vue') // eslint-disable-line
+        VWidgetVMT: () => import(/* webpackChunkName: "VWidgetVMT" */ '../components/Widgets/VWidgetVMT/index.vue'), // eslint-disable-line
+        VWidgetWeather: () => import(/* webpackChunkName: "VWidgetWeather" */ '../components/Widgets/VWidgetWeather/index.vue') // eslint-disable-line
     },
     computed: {
         widgets()
